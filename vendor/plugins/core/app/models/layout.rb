@@ -60,7 +60,7 @@ class Layout < ActiveRecord::Base
         <% end %>
       }
 
-    file << actualizar_bloques(self.body)
+    file << update_blocks(self.body)
 
     file << %{
     </body>
@@ -69,7 +69,7 @@ class Layout < ActiveRecord::Base
     end
   end
 
-  def actualizar_bloques(texto)
+  def update_blocks(texto)
     antiguos_bloques = self.blocks # bloques que ya existian en el layout antes de guardar
     nuevos_bloques = [] # bloques iguales o nuevos que se van a almacenar
 
