@@ -10,7 +10,7 @@ class Layout < ActiveRecord::Base
   after_destroy :delete_layout
 
   def validate
-    self.errors[:base] << I18n.t("layout.exists_for_site") if check_name_and_site(self.name, self.site_id) and new_record?
+    self.errors.add("", I18n.t("layout.exists_for_site")) if check_name_and_site(self.name, self.site_id)
   end
 
   def self.find_layouts_del_site(site)
@@ -34,15 +34,11 @@ class Layout < ActiveRecord::Base
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
       <head>
         <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-        <title><%= session[:title] %></title>
+        <title><%= yield :title %></title>
 
         <%= stylesheet_link_tag 'base', 'public', 'jquery-ui.css', 'jquery.Jcrop', :media => 'screen, print' %>
         <%= javascript_include_tag :defaults, 'jquery.colorbox-min.js' %>
         <%= csrf_meta_tag %>
-
-        <% if session[:user_id] %>
-          <%= javascript_include_tag 'nicEdit', 'jquery.Jcrop.min' %>
-        <% end -%>
         }
 
     file << self.head
