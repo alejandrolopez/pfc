@@ -1,0 +1,37 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  confirm_password: "Confirmar contraseña"
+  email: "Email"
+  login: "Login"
+  name: "Nombre"
+  mail: "Email"
+  password: "Contraseña"
+  surname: "Apellidos"
+  surname1: "Primer apellido"
+  surname2: "Segunda apellido"
+  
+  user:
+    activate: "Active su usuario"
+    activated: "Usuario activado con éxito"
+    create: "Crear usuario"
+    created: "Usuario creado con éxito"
+    destroy: "Eliminar usuario"
+    destroy?: "¿Está seguro de eliminar este usuario?"
+    destroyed: "Usuario eliminado con éxito"
+    edit: "Edicion de usuario"
+    forget_password: "Olvido de contraseña"
+    list: "Listado de usuarios"
+    new: "Nuevo usuario"
+    not_activated: "Hubo un problema a la hora de activar su usuario"
+    not_destroyed: "Hubo un problema a la hora de eliminar el usuario"
+    mail_sent_to_new_password: "Se le ha enviado un correo electrónico para que guarde su nueva contraseña"
+    password_modified: "La contraseña ha sido actualizada"
+    password_not_modified: "Hubo un problema a la hora de actualizar la contraseña"
+    save_new_password: "Guarde una nueva contraseña"
+    send_new_password: "Enviar nueva contraseña de usuario"
+    show: "Mostrar detalle de usuario"
+    update: "Actualizar usuario"
+    update_error: "Hubo problemas a la hora de actualizar el usuario"
+    updated: "Usuarios actualizado con éxito"

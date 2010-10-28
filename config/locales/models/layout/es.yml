@@ -1,0 +1,19 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  layout:
+    administer_blocks: "Administrar bloques del layout"
+    create: "Crear layout"
+    destroy: "Eliminar layout"
+    destroy?: "¿Está seguro de eliminar este layout?"
+    destroyed: "Layout eliminado con éxito"
+    edit: "Edicion de layout"
+    establish_base: "Poner por defecto"
+    list: "Listado de layouts"
+    new: "Nuevo layout"
+    not_destroyed: "Hubo un problema a la hora de eliminar el layout"
+    update: "Actualizar layout"
+    update_blocks: "Actualizar bloques del layout"
+    update_error: "Hubo problemas a la hora de actualizar el layout"
+    updated: "Layout actualizado con éxito"

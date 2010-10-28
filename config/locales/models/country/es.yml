@@ -1,0 +1,21 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:  
+  country:
+    country: "Pais"
+    create: "Crear pais"
+    created: "Pais creado con éxito"
+    destroy: "Eliminar pais"
+    destroy?: "¿Está seguro de eliminar este pais?"
+    destroyed: "Pais eliminado con éxito"
+    edit: "Edicion de pais"
+    list: "Listado de paises"
+    new: "Nuevo pais"
+    not_destroyed: "Hubo un problema a la hora de eliminar el pais"
+    save: "Guardar pais"
+    show: "Mostrar detalle del pais"
+    show_provinces: "Ver las provincias del pais"
+    update: "Actualizar pais"
+    update_error: "Hubo problemas a la hora de actualizar el pais"
+    updated: "Pais actualizado con éxito"

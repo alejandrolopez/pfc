@@ -1,0 +1,34 @@
+<div>
+  <label for="author_name"><%= t("name") %>: </label>
+  <%= text_field :author, :name %>
+</div>
+
+<div>
+  <label for="author_surname1"><%= t("surname1") %>: </label>
+  <%= text_field :author, :surname1 %>
+</div>
+
+<div>
+  <label for="author_surname2"><%= t("surname2") %>: </label>
+  <%= text_field :author, :surname2 %>
+</div>
+
+<div>
+  <label for="author_description"><%= t("description") %>: </label>
+  <%= text_area :author, :description, :cols => 40, :rows => 8 %>
+</div>
+
+<div>
+  <label for="author_email"><%= t("email") %>: </label>
+  <%= text_field :author, :email %>
+</div>
+
+<div>
+  <label for="author_web"><%= t("web") %>: </label>
+  <%= text_field :author, :web %>
+</div>
+
+<div>
+  <label for="author_country_id"><%= t("country.country") %></label>
+  <%= select :author, :country_id, @countries.collect{|country| [country.name, country.id]}, :include_blank => true %>
+</div>

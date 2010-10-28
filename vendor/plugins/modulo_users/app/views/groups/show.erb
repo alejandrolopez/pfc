@@ -1,0 +1,17 @@
+<h1><%= @group.name %></h1>
+<p><%= @group.description %></p>
+
+<ul class="users-list">
+  <% @users.each do |user| %>
+    <li id="user_<%= user.id %>">
+      <% if @group.can_delete_user?(user) %>
+        <%= link_to user.login, delete_from_group_group_path(@group, :user_id => user.id), :remote => true, :title => t("group.delete_from_group"), :method => :delete %>
+      <% else %>
+        <%= user.login %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to t("group.add_user_to_group"), add_user_group_path(@group), :remote => true, :title => t("group.add_user_to_group"), :class => "add_colorbox" %> |
+<%= link_to t("edit"), edit_group_path(@group) %> | <%= link_to t("back"), groups_path, :class => "back" %>

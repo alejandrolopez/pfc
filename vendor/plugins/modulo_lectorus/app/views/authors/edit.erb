@@ -1,0 +1,21 @@
+<h1><%= t("author.edit") %></h1>
+
+<%= render "commons/error_messages", :target => @author %>
+
+<% form_tag(author_path(@author), :method => :put) do %>
+  <div class="formulario">
+    <div class="formulario-top">
+      <div class="formulario-bottom">
+        <%= render :partial => "form" %>
+
+        <div class="botones">
+          <div>
+            <%= submit_tag t("update"), :title => t("author.update") %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to t("back"), authors_path, :class => "back" %>

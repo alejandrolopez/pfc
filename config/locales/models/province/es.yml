@@ -1,0 +1,19 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:  
+  province:
+    create: "Crear provincia"
+    created: "Provincia creada con éxito"
+    destroy: "Eliminar provincia"
+    destroy?: "¿Está seguro de eliminar esta provincia?"
+    destroyed: "Provincia eliminada con éxito"
+    edit: "Edicion de provincia"
+    list: "Listado de provincias"
+    new: "Nueva provincia"
+    not_destroyed: "Hubo un problema a la hora de eliminar la provincia"
+    save: "Guardar provincia"
+    show: "Mostrar detalle de provincia"
+    update: "Actualizar provincia"
+    update_error: "Hubo problemas a la hora de actualizar la provincia"
+    updated: "Provincia actualizada con éxito"

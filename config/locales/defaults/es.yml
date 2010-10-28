@@ -1,0 +1,24 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  actions: "Acciones"
+  back: "Volver"
+  body: "Body"
+  cancel: "Cancelar"
+  close_error: "Cerrar la ventana de error"
+  close_info: "Cerrar la ventana de información"
+  create: "Crear"
+  destroy: "Eliminar"
+  edit: "Editar"
+  error: "error"
+  errors: "errores"
+  error_to_save: "no permite guardar estos datos"
+  errors_to_save: "no permiten guardar estos datos"
+  head: "Head"
+  new: "Nuevo"
+  save: "Guardar"
+  send: "Enviar"
+  show: "Mostrar"
+  update: "Actualizar"
+  value: "Valor"

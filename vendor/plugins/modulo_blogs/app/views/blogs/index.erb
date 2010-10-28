@@ -1,0 +1,28 @@
+<h1><%= t("blog.list") %></h1>
+
+<%= raw format_notice(flash[:notice]) %>
+<%= raw format_error(flash[:error]) %>
+
+<table>
+  <tr>
+    <th><%= sortable "title", t("title") %></th>
+    <th><%= t("actions") %></th>
+  </tr>
+
+  <% @blogs.each do |blog| %>
+    <tr>
+      <td><%= blog.title %></td>
+      <td class="acciones">
+        <%= link_to t("show"), blog_posts_path(blog), :title => t("blog.show") %>
+        <%= link_to t("edit"), edit_blog_path(blog), :title => t("blog.edit") %>
+        <%= link_to t("destroy"), blog_path(blog), :confirm => t("blog.destroy?"), :method => :delete, :title => t("blog.destroy") %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= will_paginate(@blogs) %>
+
+<div class="admin-links">
+  <%= link_to t("blog.new"), new_blog_path %>
+</div>

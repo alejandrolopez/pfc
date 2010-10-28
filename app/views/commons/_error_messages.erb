@@ -1,0 +1,10 @@
+<% if target.errors.any? %>
+<div id="errorExplanation">
+  <h2><%= target.errors.count %> <%= target.errors.count == 1 ? t("error") : t("errors") %> <%= target.errors.count == 1 ? t("error_to_save") : t("errors_to_save") %>:</h2>
+  <ul>
+    <% target.errors.map do |key, value| %>
+      <li><%= I18n.t(key) %> <%= value %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>  

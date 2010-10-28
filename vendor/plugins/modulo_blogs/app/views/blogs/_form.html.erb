@@ -1,0 +1,9 @@
+<div>
+  <label for="blog_title"><%= t("title") %>: </label>
+  <%= text_field :blog, :title %>
+</div>
+
+<div>
+  <label for="blog_description"><%= t("description") %>: </label>
+  <%= text_area :blog, :description, :cols => 40, :rows => 8 %>
+</div>

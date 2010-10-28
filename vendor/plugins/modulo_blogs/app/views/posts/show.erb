@@ -1,0 +1,11 @@
+<div><%= @post.title %></div>
+<div><%= @post.summary %></div>
+<div><%= @post.description %></div>
+
+<% unless session[:user_id].blank? %>
+  <div class="enlaces">
+    <%= link_to t("comment"), "#" ,:class => "show_form_comment", :rel => "blog_post_#{@post.id}" %>
+  </div>
+<% end -%>
+
+<%= render :partial => "comentarios", :locals => {:comments => @comments} %>

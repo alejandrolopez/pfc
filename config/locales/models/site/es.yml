@@ -1,0 +1,20 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  name: "Nombre"
+  domain: "Dominio"
+  
+  site:
+    create: "Crear dominio"
+    destroy: "Eliminar dominio"
+    destroy?: "¿Está seguro de eliminar este dominio?"
+    destroyed: "Dominio eliminado con éxito"
+    edit: "Edicion de dominio"
+    last_one: "No se puede eliminar el dominio, es necesario un dominio en el sistema"
+    list: "Listado de dominios"
+    new: "Nuevo dominio"
+    not_destroyed: "Hubo un problema a la hora de eliminar el dominio"
+    update: "Actualizar dominio"
+    update_error: "Hubo problemas a la hora de actualizar el dominio"
+    updated: "Dominio actualizado con éxito"

@@ -1,0 +1,8 @@
+<h1><%= t("user.show") %></h1>
+
+<p><strong><%= t("login") %></strong>: <%= @user.login %> </p>
+<p><strong><%= t("name") %></strong>: <%= @user.name %> </p>
+<p><strong><%= t("surname") %></strong>: <%= @user.surname %></p>
+<p><strong><%= t("email") %></strong>: <%= @user.email %></p>
+
+<%= link_to t("back"), users_path(:page => params[:page]), :class => "back", :title => t("back") %>

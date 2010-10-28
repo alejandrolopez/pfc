@@ -1,0 +1,24 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  name: "Nombre"
+  description: "Descripcion"
+  
+  group:
+    add_user_to_group: "Añadir usuario al grupo"
+    create: "Crear grupo de usuarios"
+    created: "Grupo de usuarios creado con éxito"
+    delete_from_group: "Eliminar a usuario del grupo"
+    destroy: "Eliminar grupo de usuarios"
+    destroy?: "¿Está seguro de eliminar este grupo de usuarios?"
+    destroyed: "Grupo de usuarios eliminado con éxito"
+    edit: "Edicion de grupo de usuarios"
+    last_one: "No se puede eliminar el grupo de usuarios, es necesario uno en el sistema"
+    list: "Listado de grupos de usuarios"
+    new: "Nuevo grupo de usuarios"
+    not_destroyed: "Hubo un problema a la hora de eliminar el grupo de usuarios"
+    show: "Mostrar detalles del grupo de usuarios"
+    update: "Actualizar grupo de usuarios"
+    update_error: "Hubo problemas a la hora de actualizar el grupo de usuarios"
+    updated: "Grupo de usuarios actualizado con éxito"

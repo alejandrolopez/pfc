@@ -1,0 +1,19 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  book:
+    create: "Crear libro"
+    created: "Libro creado con éxito"
+    destroy: "Eliminar libro"
+    destroy?: "¿Está seguro de eliminar este libro?"
+    destroyed: "Libro eliminado con éxito"
+    edit: "Edicion de libro"
+    list: "Listado de libros"
+    new: "Nuevo libro"
+    not_destroyed: "Hubo un problema a la hora de eliminar el libro seleccionado"
+    save: "Guardar libro"
+    show: "Mostrar detalle del libro"
+    update: "Actualizar libro"
+    update_error: "Hubo problemas a la hora de actualizar el libro seleccionado"
+    updated: "Libro actualizado con éxito"

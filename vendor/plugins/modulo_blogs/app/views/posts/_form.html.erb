@@ -1,0 +1,24 @@
+<div>
+  <label for="post_title"><%= t("title") %>: </label>
+  <%= text_field :post, :title %>
+</div>
+
+<div>
+  <label for="post_summary"><%= t("summary") %>: </label>
+  <%= text_area :post, :summary, :cols => 40, :rows => 4 %>
+</div>
+
+<div>
+  <label for="post_description"><%= t("description") %>: </label>
+  <%= text_area :post, :description, :cols => 40, :rows => 8 %>
+</div>
+
+<div>
+  <label for="post_published_at"><%= t("published_at") %>: </label>
+  <%= date_select :post, :published_at %>
+</div>
+
+<div>
+  <label for="post_unpublished_at"><%= t("unpublished_at") %>: </label>
+  <%= date_select :post, :unpublished_at %>
+</div>

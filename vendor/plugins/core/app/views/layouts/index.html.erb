@@ -1,0 +1,29 @@
+<h1><%= t("layout.list") %></h1>
+
+<%= raw format_notice(flash[:notice]) %>
+<%= raw format_error(flash[:error]) %>
+
+<table>
+  <tr>
+    <th><%= t("name") %></th>
+    <th><%= t("actions") %></th>
+  </tr>
+
+  <% @layouts.each do |layout| %>
+    <tr>
+      <td><%=h layout.name %></td>
+      <td class="acciones">
+        <% if layout.base == 0 %>
+          <%= link_to t("layout.establish_base"), establish_base_layout_path(layout), :method => :put %>
+        <% end -%>
+        <%= link_to t("layout.administer_blocks"), administer_blocks_layout_path(layout) %>
+        <%= link_to t("edit"), edit_layout_path(layout) %>
+        <%= link_to t("destroy"), layout, :confirm => t("layout.destroy?"), :method => :delete %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<div class="cms">
+  <%= link_to t("layout.new"), new_layout_path %>
+</div>

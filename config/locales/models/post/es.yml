@@ -1,0 +1,20 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  post:
+    create: "Crear post"
+    created: "Post creado con éxito"
+    destroy: "Eliminar post"
+    destroy?: "¿Está seguro de eliminar este post?"
+    destroyed: "Post eliminado con éxito"
+    edit: "Edicion de post"
+    list: "Listado de posts"
+    new: "Nuevo post"
+    not_destroyed: "Hubo un problema a la hora de eliminar el post"
+    published_at_more_less_than_unpublished_at: "es superior a la fecha de caducidad"
+    save: "Guardar post"
+    show: "Mostrar detalle del post"
+    update: "Actualizar post"
+    update_error: "Hubo problemas a la hora de actualizar el post"
+    updated: "Post actualizado con éxito"

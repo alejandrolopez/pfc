@@ -1,0 +1,19 @@
+<div>
+  <label for="book_title"><%= t("title") %>: </label>
+  <%= text_field :book, :title %>
+</div>
+
+<div>
+  <label for="book_summary"><%= t("summary") %>: </label>
+  <%#= text_field :book, :summary %>
+</div>
+
+<div>
+  <label for="book_description"><%= t("description") %>: </label>
+  <%= text_area :book, :description %>
+</div>
+
+<div>
+  <label for="book_author_ids"><%= t("book.author") %>: </label>
+  <%= select :book, :author_ids, @authors.collect{|author| [author.complete_name, author.id]}, :include_blank => true %>
+</div>

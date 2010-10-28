@@ -1,0 +1,21 @@
+<h1><%= t("user.new") %></h1>
+
+<%= render "commons/error_messages", :target => @user %>
+
+<% form_tag(users_path(:page => params[:page]),{:multipart => true}) do %>
+  <div class="formulario">
+    <div class="formulario-top">
+      <div class="formulario-bottom">
+        <%= render :partial => "form" %>
+
+        <div class="buttons">
+          <div>
+            <%= submit_tag t("create"), :class => 'boton', :title => t("user.create") %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to t("back"), users_path(:page => params[:page]), :class => "back", :title => t("back") %>

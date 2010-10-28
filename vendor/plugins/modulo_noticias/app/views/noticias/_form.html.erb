@@ -1,0 +1,24 @@
+<div>
+  <label for="noticia_title"><%= t("title") %>: </label>
+  <%= text_field :noticia, :title %>
+</div>
+
+<div>
+  <label for="noticia_summary"><%= t("summary") %>: </label>
+  <%= text_area :noticia, :summary, :cols => 40, :rows => 4 %>
+</div>
+
+<div>
+  <label for="noticia_description"><%= t("description") %>: </label>
+  <%= text_area :noticia, :description, :cols => 40, :rows => 8 %>
+</div>
+
+<div>
+  <label for="noticia_published_at"><%= t("published_at") %>: </label>
+  <%= date_select :noticia, :published_at %>
+</div>
+
+<div>
+  <label for="noticia_unpublished_at"><%= t("unpublished_at") %>: </label>
+  <%= date_select :noticia, :unpublished_at %>
+</div>

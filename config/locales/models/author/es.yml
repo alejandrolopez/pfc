@@ -1,0 +1,19 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  author:
+    create: "Crear autor"
+    created: "Autor creado con éxito"
+    destroy: "Eliminar autor"
+    destroy?: "¿Está seguro de eliminar este autor?"
+    destroyed: "Autor eliminado con éxito"
+    edit: "Edicion de autor"
+    list: "Listado de autores"
+    new: "Nuevo autor"
+    not_destroyed: "Hubo un problema a la hora de eliminar el autor seleccionado"
+    save: "Guardar autor"
+    show: "Mostrar detalle del autor"
+    update: "Actualizar autor"
+    update_error: "Hubo problemas a la hora de actualizar el autor seleccionado"
+    updated: "Autor actualizado con éxito"

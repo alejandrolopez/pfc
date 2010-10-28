@@ -1,0 +1,38 @@
+<% if session[:user_id] %>
+  <%= raw format_notice(flash[:notice]) %>
+
+  <%= link_to "Desconectar", logout_login_index_path, :method => :post %>
+<% else %>
+  <%= t("user.login") %>
+
+  <%= raw format_notice(flash[:notice]) %>
+  <%= raw format_error(flash[:error])%>
+
+  <div class="formulario">
+    <div class="esq-top-izq">
+      <div class="esq-top-der">
+        <div class="esq-bot-der">
+          <div class="esq-bot-izq">
+            <%= form_tag login_index_path, :method => :post do %>
+              <div>
+                <label for="login_login"><%= t("user.login")  %>: </label>
+                <%= text_field :login, :login %>
+              </div>
+
+              <div>
+                <label for="login_password"><%= t("user.password") %>:</label>
+                <%= password_field :login, :password %>
+              </div>
+
+              <div class="botones">
+                <div>
+                  <%= submit_tag t("send"), :title => t("send") %>
+                </div>
+              </div>
+            <% end -%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end -%>

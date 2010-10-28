@@ -1,0 +1,21 @@
+<h1><%= t("user.edit") %></h1>
+
+<%= render "commons/error_messages", :target => @user %>
+
+<% form_tag(user_path(@user, :page => params[:page]), {:method => :put}) do %>
+  <div class="formulario">
+    <div class="formulario-top">
+      <div class="formulario-bottom">
+        <%= render :partial => "form" %>
+
+        <div class="buttons">
+          <div>
+            <%= submit_tag t("update"), :class => 'boton', :title => t("user.update") %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to t("back"), users_path(:page => params[:page]), :class => "back", :title => t("back") %>

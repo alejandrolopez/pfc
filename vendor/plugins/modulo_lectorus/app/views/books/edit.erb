@@ -1,0 +1,21 @@
+<h1><%= t("book.edit") %></h1>
+
+<%= render "commons/error_messages", :target => @book %>
+
+<% form_tag(book_path(@book), :method => :put) do %>
+  <div class="formulario">
+    <div class="formulario-top">
+      <div class="formulario-bottom">
+        <%= render :partial => "form" %>
+
+        <div class="botones">
+          <div>
+            <%= submit_tag t("update"), :title => t("book.update") %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to t("back"), books_path, :class => "back" %>

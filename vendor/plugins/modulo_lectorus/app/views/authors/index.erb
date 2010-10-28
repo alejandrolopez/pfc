@@ -1,0 +1,26 @@
+<h1><%= t("author.list") %></h1>
+
+<%= raw format_notice(flash[:notice]) %>
+<%= raw format_error(flash[:error]) %>
+
+<table>
+  <tr>
+    <th><%= t("name") %></th>
+    <th><%= t("actions") %></th>
+  </tr>
+
+  <% @authors.each do |author| %>
+    <tr>
+      <td><%= author.name %></td>
+      <td class="acciones">
+        <%= link_to t("show"), author_path(author), :title => t("author.show") %>
+        <%= link_to t("edit"), edit_author_path(author), :title => t("author.edit") %>
+        <%= link_to t("destroy"), author, :confirm => t("author.destroy?"), :method => :delete, :title => t("author.destroy") %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<div class="admin-links">
+  <%= link_to t("author.new"), new_author_path %>
+</div>

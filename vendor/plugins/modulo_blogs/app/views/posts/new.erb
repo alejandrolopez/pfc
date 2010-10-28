@@ -1,0 +1,21 @@
+<h1><%= t("post.new") %></h1>
+
+<%= render "commons/error_messages", :target => @post %>
+
+<% form_tag(blog_posts_path(@blog), :method => :post) do %>
+  <div class="formulario">
+    <div class="formulario-top">
+      <div class="formulario-bottom">
+        <%= render :partial => "form" %>
+
+        <div class="botones">
+          <div>
+            <%= submit_tag t("create"), :title => t("post.create")  %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to t("back"), blog_posts_path, :class => "back" %>

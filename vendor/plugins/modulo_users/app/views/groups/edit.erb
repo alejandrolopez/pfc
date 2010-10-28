@@ -1,0 +1,21 @@
+<h1><%= t("group.edit") %></h1>
+
+<%= render "commons/error_messages", :target => @group %>
+
+<% form_tag group_path(@group, :page => params[:page]), :method => :put do %>
+  <div class="formulario">
+    <div class="formulario-top">
+      <div class="formulario-bottom">
+	<%= render :partial => "form" %>
+
+        <div class="botones">
+          <div>
+            <%= submit_tag t("update"), :title => t("group.update") %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to t("back"), groups_path(:page => params[:page]), :class => "back", :title => t("back") %>

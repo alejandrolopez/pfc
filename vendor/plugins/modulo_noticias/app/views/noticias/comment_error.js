@@ -1,0 +1,1 @@
+$("#form_comment_noticia_<%= @noticia.id %>").find("textarea").addClass("error");

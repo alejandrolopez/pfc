@@ -1,0 +1,19 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  blog:
+    create: "Crear blog"
+    created: "Blog creado con éxito"
+    destroy: "Eliminar blog"
+    destroy?: "¿Está seguro de eliminar este blog y sus posts asociados?"
+    destroyed: "Blog eliminado con éxito"
+    edit: "Edicion de blog"
+    list: "Listado de blogs"
+    new: "Nuevo blog"
+    not_destroyed: "Hubo un problema a la hora de eliminar el blog"
+    save: "Guardar blog"
+    show: "Mostrar detalle del blog"
+    update: "Actualizar blog"
+    update_error: "Hubo problemas a la hora de actualizar el blog"
+    updated: "Blog actualizado con éxito"

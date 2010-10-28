@@ -1,0 +1,26 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  title: "Titulo"
+  summary: "Resumen"
+  published_at: "Fecha de publicacion"
+  unpublished_at: "Fecha de caducidad"
+  num_visits: "Numero de visitas"
+
+  noticia:
+    create: "Crear noticia"
+    created: "Noticia creada con éxito"
+    destroy: "Eliminar noticia"
+    destroy?: "¿Está seguro de eliminar esta noticia?"
+    destroyed: "Noticia eliminada con éxito"
+    edit: "Edicion de noticia"
+    list: "Listado de noticias"
+    new: "Nueva noticia"
+    not_destroyed: "Hubo un problema a la hora de eliminar la noticia"
+    published_at_more_less_than_unpublished_at: "es superior a la fecha de caducidad"
+    save: "Guardar noticia"
+    show: "Mostrar detalle de la noticia"
+    update: "Actualizar noticia"
+    update_error: "Hubo problemas a la hora de actualizar la noticia"
+    updated: "Noticia actualizada con éxito"

@@ -1,0 +1,59 @@
+--- 
+dependencies: 
+  activerecord: 
+    group: 
+    - :default
+    version: ">= 3.0.0.beta4"
+  sqlite3-ruby: 
+    group: 
+    - :test
+    version: ">= 0"
+    require: 
+    - sqlite3
+  rake: 
+    group: 
+    - :default
+    version: ">= 0"
+  rspec: 
+    group: 
+    - :test
+    version: ">= 2.0.0.beta.16"
+  bundler: 
+    group: 
+    - :default
+    version: ">= 0.9.26"
+specs: 
+- rake: 
+    version: 0.8.7
+- activesupport: 
+    version: 3.0.0.beta4
+- builder: 
+    version: 2.1.2
+- i18n: 
+    version: 0.4.1
+- activemodel: 
+    version: 3.0.0.beta4
+- arel: 
+    version: 0.4.0
+- tzinfo: 
+    version: 0.3.22
+- activerecord: 
+    version: 3.0.0.beta4
+- bundler: 
+    version: 0.9.26
+- diff-lcs: 
+    version: 1.1.2
+- rspec-core: 
+    version: 2.0.0.beta.16
+- rspec-expectations: 
+    version: 2.0.0.beta.16
+- rspec-mocks: 
+    version: 2.0.0.beta.16
+- rspec: 
+    version: 2.0.0.beta.16
+- sqlite3-ruby: 
+    version: 1.3.1
+hash: 337e1b792be8a21c405eca5a875d72cb22491fb3
+sources: 
+- Rubygems: 
+    uri: http://gemcutter.org

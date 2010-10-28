@@ -1,0 +1,34 @@
+<h1><%= t("noticia.list") %></h1>
+
+<%= raw format_notice(flash[:notice]) %>
+<%= raw format_error(flash[:error]) %>
+
+<table>
+  <tr>
+    <th><%= sortable "title", t("title") %></th>
+    <th><%= sortable "published_at", t("published_at") %></th>
+    <th><%= sortable "unpublished_at", t("unpublished_at") %></th>
+    <th><%= sortable "num_visits", t("num_visits") %></th>
+    <th><%= t("actions") %></th>
+  </tr>
+
+  <% @noticias.each do |noticia| %>
+    <tr>
+      <td><%= noticia.title %></td>
+      <td><%= noticia.published_at.strftime("%d-%m-%Y") %></td>
+      <td><%= noticia.unpublished_at.strftime("%d-%m-%Y") %></td>
+      <td><%= noticia.num_visits %></td>
+      <td class="acciones">
+        <%= link_to t("show"), noticia_path(noticia), :title => t("noticia.show") %>
+        <%= link_to t("edit"), edit_noticia_path(noticia), :title => t("noticia.edit") %>
+        <%= link_to t("destroy"), noticia, :confirm => t("noticia.destroy?"), :method => :delete, :title => t("noticia.destroy") %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= will_paginate(@noticias) %>
+
+<div class="admin-links">
+  <%= link_to t("noticia.new"), new_noticia_path %>
+</div>

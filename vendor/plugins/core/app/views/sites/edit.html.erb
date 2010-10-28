@@ -1,0 +1,21 @@
+<h1><%= t("site.edit") %></h1>
+
+<%= render "commons/error_messages", :target => @site %>
+
+<% form_tag(site_path(@site), :method => :put) do %>
+  <div class="formulario">
+    <div class="formulario-top">
+      <div class="formulario-bottom">
+        <%= render :partial => "form" %>
+
+        <div class="botones">
+          <div>
+            <%= submit_tag t("update"), :title => t("site.update") %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to t("show"), @site %> | <%= link_to t("back"), sites_path %>

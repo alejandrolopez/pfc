@@ -1,0 +1,30 @@
+<h1><%= t("country.list") %></h1>
+
+<%= raw format_notice(flash[:notice]) %>
+<%= raw format_error(flash[:error]) %>
+
+<table>
+  <tr>
+    <th><%= t("name") %></th>
+    <th><%= t("value") %></th>
+    <th><%= t("actions") %></th>
+  </tr>
+
+  <% @countries.each do |country| %>
+    <tr>
+      <td><%=h country.name %></td>
+      <td><%=h country.value %></td>
+      <td>
+        <%= link_to t("country.show_provinces"), country_provinces_path(country), :title => t("country.show_provinces") %>
+        <%= link_to t("edit"), edit_country_path(country), :title => t("country.edit") %>
+        <%= link_to t("destroy"), country, :confirm => t("country.destroy?"), :method => :delete, :title => t("country.destroy") %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= will_paginate(@countries) %>
+
+<div class="admin-link">
+  <%= link_to t("country.new"), new_country_path(:page => params[:page]) %>
+</div>

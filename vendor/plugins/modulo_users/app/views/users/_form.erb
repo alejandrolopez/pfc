@@ -1,0 +1,34 @@
+<div>
+  <label for="user_login"><strong><%= t("login") %>: </strong></label>
+  <%= text_field :user, :login %>
+</div>
+
+<div>
+  <label for="user_password"><strong><%= t("password") %>: </strong></label>
+  <%= password_field :user, :password %>
+</div>
+
+<div>
+  <label for="user_password_confirmation"><strong><%= t("confirm_password") %>: </strong></label>
+  <%= password_field :user, :password_confirmation %>
+</div>
+
+<div>
+  <label for="user_name"><strong><%= t("name") %>: </strong></label>
+  <%= text_field :user, :name %>
+</div>
+
+<div>
+  <label for="user_surname1"><strong><%= t("surname1") %>: </strong></label>
+  <%= text_field :user, :surname1 %>
+</div>
+
+<div>
+  <label for="user_surname"><strong><%= t("surname2") %>: </strong></label>
+  <%= text_field :user, :surname2 %>
+</div>
+
+<div>
+  <label for="user_email"><strong><%= t("email") %>: </strong></label>
+  <%= text_field :user, :email %>
+</div>

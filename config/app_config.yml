@@ -1,0 +1,7 @@
+# Paginación por defecto
+default_pagination: 10
+medium_default_pagination: 25
+large_default_pagination: 50
+
+# Paginacion para listado noticias
+news_pagination: 5

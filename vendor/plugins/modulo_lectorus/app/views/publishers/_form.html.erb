@@ -1,0 +1,19 @@
+<div>
+  <label for="publisher_name"><%= t("name") %>: </label>
+  <%= text_field :publisher, :name %>
+</div>
+
+<div>
+  <label for="publisher_description"><%= t("description") %>: </label>
+  <%= text_area :publisher, :description, :cols => 40, :rows => 8 %>
+</div>
+
+<div>
+  <label for="publisher_email"><%= t("email") %>: </label>
+  <%= text_field :publisher, :email %>
+</div>
+
+<div>
+  <label for="publisher_web"><%= t("web") %>: </label>
+  <%= text_field :publisher, :web %>
+</div>

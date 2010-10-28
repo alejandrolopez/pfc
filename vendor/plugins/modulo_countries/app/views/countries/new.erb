@@ -1,0 +1,20 @@
+<h1><%= t("country.new") %></h1>
+
+<%= render "commons/error_messages", :target => @country %>
+
+<% form_tag(countries_path(:page => params[:page])) do %>
+  <div class="formulario">
+    <div class="formulario-top">
+      <div class="formulario-bottom">
+        <%= render :partial => 'form' %>
+        <div class="botones">
+          <div>
+            <%= submit_tag t("create"), :class => 'boton', :title => t("country.create")  %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to t("back"), countries_path, :title => t("back") %>

@@ -1,0 +1,12 @@
+<div id="comments_noticia_<%= @noticia.id %>">
+  <% comments.each do |comment| %>
+    <div>
+      <span class="autor"><%= comment.author  %></span>
+      <span class="comentario"><%= comment.comment %></span>
+    </div>
+  <% end -%>
+</div>
+
+<% unless session[:user_id].blank? %>
+  <%= render :partial => "form_comment" %>
+<% end -%>
