@@ -31,9 +31,9 @@ class Noticia < ActiveRecord::Base
   # Funcion que obtiene los comentarios válidos
   # Si no llega usuario sacamos los que son validos
   # Los ordenamos por defecto con created_at y por ultimo sacamos el número que elijamos
-  def comments_validos(user = nil, limit = nil, order = "created_at DESC")
+  def comments_validos(limit = nil, order = "created_at DESC")
     @comments = self.comments
-    @comments = @comments.where("status != 2") if user.blank?
+    @comments = @comments.where("status != 2")
     @comments = @comments.order(order)
     @comments = @comments.limit(limit) unless limit.blank?
     @comments
@@ -44,8 +44,13 @@ class Noticia < ActiveRecord::Base
     (self.published_at <= Time.now and self.unpublished_at > Time.now) ? true : false
   end
 
-  private
+  # Aumentar el numero de visitas a una noticia
+  def add_visit
+    self.update_attribute(:num_visits, self.num_visits + 1)
+  end
 
+  private
+  
     # Metodo para comprobar si la fecha de caducidad es inferior a la de publicacion
     def check_dates
       if self.unpublished_at <= self.published_at

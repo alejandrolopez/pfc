@@ -15,5 +15,15 @@
 
 <div>
   <label for="book_author_ids"><%= t("book.author") %>: </label>
-  <%= select :book, :author_ids, @authors.collect{|author| [author.complete_name, author.id]}, :include_blank => true %>
+  <%= link_to t("author.add_author"), add_author_books_path, :class => "add_author", :remote => true %>
+  <div id="book_authors">
+    <ul>
+      <% @book.authors.each do |author| %>
+        <li id="author_<%= author.id %>" author_id="<%= author.id %>">
+          <%= link_to author.complete_name, delete_author_from_book_books_path(:author_id => author.id), :title => t("book.delete_author_from_book"), :method => :delete, :remote => true %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <%= hidden_field :book, :author_ids %>
 </div>

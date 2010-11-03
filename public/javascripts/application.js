@@ -15,4 +15,13 @@ $(document).ready(function(){
         $("#form_comment_" + $(this).attr("rel")).find("textarea").removeClass("error");
         $("#form_comment_" + $(this).attr("rel")).slideDown("slow");
         });
+
+    $(".save_book").click(function(){
+        authors = [];
+        $("#book_authors LI").each(function(j){
+            authors.push($(this).attr("author_id"));
+            });
+
+        $("#book_author_ids").attr("value",authors.join(","));
+        });
     });

@@ -3,8 +3,11 @@
 
 es:
   book:
+    add_author_to_book: "Añadir autor al libro"
+    author: "Autor del libro"
     create: "Crear libro"
     created: "Libro creado con éxito"
+    delete_author_from_book: "Eliminar al autor del libro"
     destroy: "Eliminar libro"
     destroy?: "¿Está seguro de eliminar este libro?"
     destroyed: "Libro eliminado con éxito"

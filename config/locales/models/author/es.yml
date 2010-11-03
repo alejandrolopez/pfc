@@ -3,6 +3,7 @@
 
 es:
   author:
+    add_author: "Añadir autor"
     create: "Crear autor"
     created: "Autor creado con éxito"
     destroy: "Eliminar autor"

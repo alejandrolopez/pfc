@@ -4,8 +4,8 @@ class NoticiasController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_filter :admin_required
   before_filter :get_site, :only => [:create]
-  before_filter :get_noticia, :only => [:edit, :update, :show, :destroy, :comment]
-  after_filter :add_visit, :only => [:show]
+  before_filter :get_noticia, :only => [:edit, :update, :show, :destroy, :comment, :add_visit]
+  after_filter :add_visit_to_noticia, :only => [:show]
 
   def index
     @noticias = Noticia.where("site_id = #{session[:site_id]}")
@@ -46,7 +46,7 @@ class NoticiasController < ApplicationController
 
   def show
     # Sacamos los comentarios validos para el usuario en caso de que lo haya
-    @comments = @noticia.comments_validos(session[:user_id])
+    @comments = @noticia.comments_validos
   end
 
   def update
@@ -90,8 +90,10 @@ class NoticiasController < ApplicationController
     end
 
     # Añadir una visita en la vista de la misma
-    def add_visit
-      @noticia.update_attribute(:num_visits, @noticia.num_visits + 1)
+    # Como es un after_filter necesito obtener el @noticia de nuevo
+    def add_visit_to_noticia
+      get_noticia
+      @noticia.add_visit
     end
 
     def sort_column

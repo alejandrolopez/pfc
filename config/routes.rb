@@ -99,7 +99,13 @@ Cms3::Application.routes.draw do
   end
 
   resources :authors
-  resources :books
+  resources :books do
+    collection do
+      get :add_author
+      post :add_author_to_book
+      delete :delete_author_from_book
+    end
+  end
   resources :publishers
   resources :noticias do
     collection do

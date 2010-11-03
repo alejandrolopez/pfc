@@ -26,6 +26,11 @@ class Author < ActiveRecord::Base
     @authors
   end
 
+  def self.find_all_authors_except(ids)
+    @authors = Author.where("id not in (#{ids})").select("id, name, surname1, surname2").order("name ASC, surname1 ASC, surname2 ASC")
+    @authors
+  end
+
   private
 
     # Devuelve cierto si el campo email no es nulo

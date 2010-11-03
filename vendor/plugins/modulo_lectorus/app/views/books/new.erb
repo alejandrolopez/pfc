@@ -2,7 +2,7 @@
 
 <%= render "commons/error_messages", :target => @book %>
 
-<% form_tag(books_path, :method => :post) do %>
+<%= form_tag(books_path, :method => :post) do %>
   <div class="formulario">
     <div class="formulario-top">
       <div class="formulario-bottom">
@@ -10,7 +10,7 @@
 
         <div class="botones">
           <div>
-            <%= submit_tag t("create"), :title => t("create")  %>
+            <%= submit_tag t("create"), :title => t("create"), :class => "save_book"  %>
           </div>
         </div>
       </div>
