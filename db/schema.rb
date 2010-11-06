@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101026200810) do
+ActiveRecord::Schema.define(:version => 20101104213821) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(:version => 20101026200810) do
     t.integer "book_id"
   end
 
+  add_index "authors_books", ["author_id", "book_id"], :name => "index_authors_books_on_author_id_and_book_id", :unique => true
+
   create_table "blocks", :force => true do |t|
     t.string   "name"
     t.integer  "layout_id"
@@ -52,9 +54,11 @@ ActiveRecord::Schema.define(:version => 20101026200810) do
 
   create_table "books", :force => true do |t|
     t.string   "title"
+    t.text     "summary"
     t.text     "description"
     t.string   "cached_slug"
     t.integer  "site_id"
+    t.integer  "num_visits",  :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -84,6 +88,18 @@ ActiveRecord::Schema.define(:version => 20101026200810) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "critics", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "cached_slug"
+    t.integer  "num_visits",  :default => 0
+    t.integer  "book_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "critics", ["book_id"], :name => "index_critics_on_book_id"
 
   create_table "elements", :force => true do |t|
     t.string   "name"

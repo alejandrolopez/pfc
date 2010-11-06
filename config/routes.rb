@@ -105,7 +105,19 @@ Cms3::Application.routes.draw do
       post :add_author_to_book
       delete :delete_author_from_book
     end
+    member do
+      post :comment
+      get :edit_comment
+      put :update_comment
+    end
+
+    resources :critics do
+      collection do
+        post :write_your_critic
+      end
+    end
   end
+  
   resources :publishers
   resources :noticias do
     collection do
@@ -113,7 +125,8 @@ Cms3::Application.routes.draw do
     end
     member do
       post :comment
-      put :edit_comment
+      get :edit_comment
+      put :update_comment
     end
   end
 

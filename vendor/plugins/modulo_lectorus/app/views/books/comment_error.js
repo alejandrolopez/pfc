@@ -1,0 +1,1 @@
+$("#form_comment_book_<%= @book.id %>").find("textarea").addClass("error");

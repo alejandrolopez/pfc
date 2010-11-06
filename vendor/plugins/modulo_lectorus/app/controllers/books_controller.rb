@@ -24,7 +24,8 @@ class BooksController < ApplicationController
 
   def show
     # Sacamos los comentarios validos para el usuario en caso de que lo haya
-    @comments = @book.comments_validos(session[:user_id])
+    @comments = @book.comments_validos
+    @critics = @book.critics_validas(5)
   end
 
   def new
@@ -94,7 +95,7 @@ class BooksController < ApplicationController
   def add_author_to_book
     @author = Author.find(params[:author_id])
     
-    if !@author.blank? and !(session[:book_authors].include?(@author.id))
+    if !@author.blank? and !session[:book_authors].blank? and !(session[:book_authors].include?(@author.id))
       session[:book_authors] << @author.id
     end
 
@@ -122,12 +123,13 @@ class BooksController < ApplicationController
     def get_book
       begin
         @book = Book.find(params[:id])
-      rescue ActiveRecordNotFound
+      rescue ActiveRecord::RecordNotFound
         redirect_to books_path(:page => params[:page], :error => t("book.dont_exist"))
       end
     end
 
     def add_visit
+      get_book
       @book.update_attribute(:num_visits, @book.num_visits + 1)
     end
 end

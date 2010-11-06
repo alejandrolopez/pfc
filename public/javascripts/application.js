@@ -16,6 +16,12 @@ $(document).ready(function(){
         $("#form_comment_" + $(this).attr("rel")).slideDown("slow");
         });
 
+    // Para activar el formulario de criticas
+    $(".show_form_write_critic").click(function(){
+        $("#form_write_your_critic_" + $(this).attr("rel")).find("textarea").removeClass("error");
+        $("#form_write_your_critic_" + $(this).attr("rel")).slideDown("slow");
+        });
+
     $(".save_book").click(function(){
         authors = [];
         $("#book_authors LI").each(function(j){

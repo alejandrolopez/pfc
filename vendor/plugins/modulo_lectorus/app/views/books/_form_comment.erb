@@ -1,0 +1,11 @@
+<%= form_tag comment_book_path, :method => :post, :remote => true, :id => "form_comment_book_#{@book.id}", :style => "display:none;" do %>
+  <div>
+    <label for="comment_comment"><%= text_area :comment, :comment, :cols => 40, :rows => 8 %></label>
+  </div>
+
+  <div class="botones">
+    <div>
+      <%= submit_tag t("send"), :title => t("send") %>
+    </div>
+  </div>
+<% end -%>

@@ -1,0 +1,13 @@
+<div><%= @book.title %></div>
+<div><%= @book.summary %></div>
+<div><%= @book.description %></div>
+
+<% unless session[:user_id].blank? %>
+  <div class="enlaces">
+    <%= link_to t("comment"), "#" ,:class => "show_form_comment", :rel => "book_#{@book.id}" %>
+    <%= link_to t("book.write_your_critic"), "#", :class => "show_form_write_critic", :rel => "book_#{@book.id}" %>
+  </div>
+<% end -%>
+
+<%= render :partial => "comentarios", :locals => {:comments => @comments} %>
+<%= render :partial => "critics/write_your_critic", :locals => {:book => @book.id} %>

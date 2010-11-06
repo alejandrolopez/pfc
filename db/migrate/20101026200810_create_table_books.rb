@@ -3,9 +3,11 @@ class CreateTableBooks < ActiveRecord::Migration
   def self.up
     create_table :books do |t|
       t.column :title, :string
+      t.column :summary, :text
       t.column :description, :text
       t.column :cached_slug, :string
       t.column :site_id, :integer, :size => 11
+      t.column :num_visits, :integer, :default => 0
       t.timestamps
     end
 

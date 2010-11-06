@@ -3,12 +3,33 @@ class Book < ActiveRecord::Base
   acts_as_commentable
 
   belongs_to :site
+  has_many :critics, :order => "created_at DESC"
   has_and_belongs_to_many :authors, :order => "name ASC, surname1 ASC, surname2 ASC"
 
   has_friendly_id :title, :use_slug => true, :approximate_ascii => true
 
   validates :title, :presence => true
   validates :description, :presence => true
+
+  # Funcion que obtiene los comentarios válidos
+  # Si no llega usuario sacamos los que son validos
+  # Los ordenamos por defecto con created_at y por ultimo sacamos el número que elijamos
+  def comments_validos(limit = nil, order = "created_at DESC")
+    @comments = self.comments
+    @comments = @comments.where("status != 2")
+    @comments = @comments.order(order)
+    @comments = @comments.limit(limit) unless limit.blank?
+    @comments
+  end
+
+  # Devuelvo el listado de las últimas criticas
+  def critics_validas(limit = nil, order = "created_at DESC")
+    @critics = self.critics
+    # @critics = @critics.where("status != 2")
+    @critics  =@critics.order(order)
+    @critics = @critics.limit(limit) unless limit.blank?
+    @critics
+  end
 
   # Devuelvo la lista de ids del autor
   def author_ids
