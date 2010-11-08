@@ -29,6 +29,7 @@ class CriticsController < ApplicationController
   def create
     @critic = Critic.new(params[:critic])
     @critic.book_id = @book.id
+    @critic.user_id = session[:user_id]
 
     if @critic.save
       redirect_to(book_critics_path(@book, :page => params[:page]), :notice => t("critic.created"))

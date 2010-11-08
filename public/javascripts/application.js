@@ -22,6 +22,7 @@ $(document).ready(function(){
         $("#form_write_your_critic_" + $(this).attr("rel")).slideDown("slow");
         });
 
+    // Guardo los autores y editoriales que se almacenan
     $(".save_book").click(function(){
         authors = [];
         $("#book_authors LI").each(function(j){
@@ -29,5 +30,12 @@ $(document).ready(function(){
             });
 
         $("#book_author_ids").attr("value",authors.join(","));
+
+        publishers = [];
+        $("#book_publishers LI").each(function(j){
+            publishers.push($(this).attr("publisher_id"));
+            });
+
+        $("#book_publisher_ids").attr("value",publishers.join(","));
         });
     });

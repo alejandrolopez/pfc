@@ -15,6 +15,7 @@ es:
     list: "Listado de libros"
     new: "Nuevo libro"
     not_destroyed: "Hubo un problema a la hora de eliminar el libro seleccionado"
+    publisher: "Editorial"
     save: "Guardar libro"
     show: "Mostrar detalle del libro"
     update: "Actualizar libro"

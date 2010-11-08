@@ -5,6 +5,7 @@ class Book < ActiveRecord::Base
   belongs_to :site
   has_many :critics, :order => "created_at DESC"
   has_and_belongs_to_many :authors, :order => "name ASC, surname1 ASC, surname2 ASC"
+  has_and_belongs_to_many :publishers, :order => "name ASC"
 
   has_friendly_id :title, :use_slug => true, :approximate_ascii => true
 
@@ -25,8 +26,8 @@ class Book < ActiveRecord::Base
   # Devuelvo el listado de las últimas criticas
   def critics_validas(limit = nil, order = "created_at DESC")
     @critics = self.critics
-    # @critics = @critics.where("status != 2")
-    @critics  =@critics.order(order)
+    @critics = @critics.where(["published = ? and status != ?", 1, 2])
+    @critics  =@critics.select("id, title, summary, published_at").order(order)
     @critics = @critics.limit(limit) unless limit.blank?
     @critics
   end
@@ -45,6 +46,27 @@ class Book < ActiveRecord::Base
       array_values.each do |elto|
         begin
           self.authors << Author.find(elto)
+        rescue
+          nil
+        end
+      end
+    end
+  end
+
+  # Devuelvo la lista de ids de editoriales
+  def publisher_ids
+    publishers.collect(&:id).join(",")
+  end
+
+  # Adjunto a la lista de editoriales del libro los ids capturados en el formulario
+  def publisher_ids=(value)
+    if value != self.publishers.collect(&:publisher_id).join(",")
+      self.publishers.clear
+      array_values = value
+      array_values = value.split(",") if value.is_a?(String)
+      array_values.each do |elto|
+        begin
+          self.authors << Publisher.find(elto)
         rescue
           nil
         end

@@ -63,6 +63,13 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
     t.datetime "updated_at"
   end
 
+  create_table "books_publishers", :id => false, :force => true do |t|
+    t.integer "book_id"
+    t.integer "publisher_id"
+  end
+
+  add_index "books_publishers", ["book_id", "publisher_id"], :name => "index_books_publishers_on_book_id_and_publisher_id", :unique => true
+
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
     t.text     "comment"
@@ -91,15 +98,22 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
 
   create_table "critics", :force => true do |t|
     t.string   "title"
+    t.text     "summary"
     t.text     "description"
+    t.string   "author"
     t.string   "cached_slug"
-    t.integer  "num_visits",  :default => 0
+    t.integer  "num_visits",   :default => 0
+    t.boolean  "published",    :default => false
     t.integer  "book_id"
+    t.integer  "user_id"
+    t.datetime "published_at"
+    t.integer  "status",       :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "critics", ["book_id"], :name => "index_critics_on_book_id"
+  add_index "critics", ["user_id"], :name => "index_critics_on_user_id"
 
   create_table "elements", :force => true do |t|
     t.string   "name"
@@ -190,12 +204,16 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
   end
 
   create_table "publishers", :force => true do |t|
-    t.string "name"
-    t.text   "description"
-    t.string "web"
-    t.string "email"
-    t.string "address"
-    t.string "lang"
+    t.string   "name"
+    t.text     "description"
+    t.string   "web"
+    t.string   "email"
+    t.string   "address"
+    t.string   "cached_slug"
+    t.string   "lang"
+    t.integer  "site_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sites", :force => true do |t|

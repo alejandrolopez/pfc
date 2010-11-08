@@ -7,7 +7,10 @@ class CreateTablePublishers < ActiveRecord::Migration
       t.column :web, :string
       t.column :email, :string
       t.column :address, :string
+      t.column :cached_slug, :string
       t.column :lang, :string, :size => 3
+      t.column :site_id, :integer
+      t.timestamps
     end
   end
 

@@ -104,6 +104,9 @@ Cms3::Application.routes.draw do
       get :add_author
       post :add_author_to_book
       delete :delete_author_from_book
+      get :add_publisher
+      post :add_publisher_to_book
+      delete :delete_publisher_from_book
     end
     member do
       post :comment

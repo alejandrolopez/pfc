@@ -17,11 +17,19 @@ class CreateTableBooks < ActiveRecord::Migration
     end
 
     add_index :authors_books, [:author_id, :book_id], :unique => true
+
+    create_table :books_publishers, :id => false do |t|
+      t.column :book_id, :integer, :size => 11
+      t.column :publisher_id, :integer, :size => 11
+    end
+
+    add_index :books_publishers, [:book_id, :publisher_id], :unique => true
   end
 
   def self.down
     drop_table :books
     drop_table :authors_books
+    drop_table :books_publishers
   end
 
 end

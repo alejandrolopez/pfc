@@ -3,7 +3,8 @@ class BooksController < ApplicationController
   before_filter :admin_required
   before_filter :get_site, :only => [:create]
   before_filter :get_all_authors, :only => [:new, :create, :edit, :update]
-  before_filter :get_book, :only => [:edit, :update, :destroy, :show]
+  before_filter :get_all_publishers, :only => [:new, :create, :edit, :update]
+  before_filter :get_book, :only => [:edit, :update, :destroy, :show, :comment]
   after_filter :add_visit, :only => [:show]
 
   def index
@@ -31,6 +32,7 @@ class BooksController < ApplicationController
   def new
     @book = Book.new
     session[:book_authors] = nil
+    session[:book_publishers] = nil
   end
 
   # El guardado de un libro se complementa en application.js con una llamada click al boton .save_book
@@ -47,7 +49,9 @@ class BooksController < ApplicationController
 
   def edit
     session[:book_authors] = nil
+    session[:book_publishers] = nil
     session[:book_authors] = @book.authors.collect(&:id) rescue []
+    session[:book_publishers] = @book.publishers.collect(&:id) rescue []
   end
 
   # El guardado de un libro se complementa en application.js con una llamada click al boton .save_book
@@ -118,6 +122,10 @@ class BooksController < ApplicationController
 
     def get_all_authors
       @authors = Author.find_all_authors
+    end
+
+    def get_all_publishers
+      @publishers = Publisher.find_all_publishers
     end
   
     def get_book

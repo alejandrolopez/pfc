@@ -1,0 +1,17 @@
+<%= form_tag write_your_critic_book_critics_path(@book), :method => :post, :remote => true, :id => "form_write_your_critic_book_#{@book.id}", :style => "display:none;" do %>
+  <div>
+    <label for="critic_title"><%= t("title") %>: </label>
+    <%= text_field :critic, :title %>
+  </div>
+
+  <div>
+    <label for="critic_description"><%= t("description") %>: </label>
+    <%= text_area :critic, :description, :cols => 40, :rows => 8  %>
+  </div>
+
+  <div class="botones">
+    <div>
+      <%= submit_tag t("send"), :title => t("send") %>
+    </div>
+  </div>
+<% end -%>

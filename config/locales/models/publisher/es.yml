@@ -1,0 +1,20 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  publisher:
+    add_publisher: "Añadir editorial"
+    create: "Crear editorial"
+    created: "Editorial creada con éxito"
+    destroy: "Eliminar editorial"
+    destroy?: "¿Está seguro de eliminar esta editorial?"
+    destroyed: "Editorial eliminada con éxito"
+    edit: "Edicion de editorial"
+    list: "Listado de editoriales"
+    new: "Nueva editorial"
+    not_destroyed: "Hubo un problema a la hora de eliminar la editorial seleccionada"
+    save: "Guardar editorial"
+    show: "Mostrar detalle de la editorial"
+    update: "Actualizar editorial"
+    update_error: "Hubo problemas a la hora de actualizar la editorial seleccionada"
+    updated: "Editorial actualizada con éxito"

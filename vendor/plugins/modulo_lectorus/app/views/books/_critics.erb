@@ -1,0 +1,13 @@
+<div id="critics_book_<%= @book.id %>">
+  <% critics.each do |critic| %>
+    <div>
+      <span class="autor"><%#= critic.author  %></span>
+      <span class="title"><%= critic.title %></span>
+      <span class="summary"><%= critic.summary %></span>
+    </div>
+  <% end -%>
+</div>
+
+<% unless session[:user_id].blank? %>
+  <%= render :partial => "write_your_critic" %>
+<% end -%>

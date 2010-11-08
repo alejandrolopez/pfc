@@ -5,7 +5,7 @@
 
 <div>
   <label for="book_summary"><%= t("summary") %>: </label>
-  <%= text_field :book, :summary %>
+  <%= text_area :book, :summary, :rows => 4 %>
 </div>
 
 <div>
@@ -26,4 +26,19 @@
     </ul>
   </div>
   <%= hidden_field :book, :author_ids %>
+</div>
+
+<div>
+  <label for="book_publisher_ids"><%= t("book.publisher") %>: </label>
+  <%= link_to t("publisher.add_publisher"), add_publisher_books_path, :class => "add_publisher", :remote => true %>
+  <div id="book_publishers">
+    <ul>
+      <% @book.publishers.each do |publisher| %>
+        <li id="publisher_<%= author.id %>" publisher_id="<%= publisher.id %>">
+          <%= link_to publisher.name, delete_publisher_from_book_books_path(:publisher_id => publisher.id), :title => t("book.delete_publisher_from_book"), :method => :delete, :remote => true %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <%= hidden_field :book, :publisher_ids %>
 </div>
