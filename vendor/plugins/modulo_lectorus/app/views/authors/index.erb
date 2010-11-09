@@ -3,15 +3,19 @@
 <%= raw format_notice(flash[:notice]) %>
 <%= raw format_error(flash[:error]) %>
 
-<table>
+<table class="listado">
   <tr>
-    <th><%= t("name") %></th>
+    <th><%= sortable "name", t("name") %></th>
+    <th><%= sortable "surname1", t("surname1") %></th>
+    <th><%= sortable "surname2", t("surname2") %></th>
     <th><%= t("actions") %></th>
   </tr>
 
   <% @authors.each do |author| %>
     <tr>
       <td><%= author.name %></td>
+      <td><%= author.surname1 %></td>
+      <td><%= author.surname2 %></td>
       <td class="acciones">
         <%= link_to t("show"), author_path(author), :title => t("author.show") %>
         <%= link_to t("edit"), edit_author_path(author), :title => t("author.edit") %>

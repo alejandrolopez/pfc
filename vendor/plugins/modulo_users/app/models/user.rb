@@ -2,11 +2,9 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
 
-  # Relacionado con sites
-  belongs_to :site
   has_many :comments
   
-  has_friendly_id :login, :use_slug => true, :scope => :site, :approximate_ascii => true
+  has_friendly_id :login, :use_slug => true, :approximate_ascii => true
   acts_as_commentable
 
   # Relacion con grupos

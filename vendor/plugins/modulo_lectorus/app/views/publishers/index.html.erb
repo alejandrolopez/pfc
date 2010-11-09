@@ -5,13 +5,15 @@
 
 <table>
   <tr>
-    <th><%= t("name") %></th>
+    <th><%= sortable "name", t("name") %></th>
+    <th><%= sortable "email", t("email") %></th>
     <th><%= t("actions") %></th>
   </tr>
 
   <% @publishers.each do |publisher| %>
     <tr>
       <td><%= publisher.name %></td>
+      <td><%= publisher.email %></td>
       <td class="acciones">
         <%= link_to t("show"), publisher_path(publisher), :title => t("publisher.show") %>
         <%= link_to t("edit"), edit_publisher_path(publisher), :title => t("publisher.edit") %>

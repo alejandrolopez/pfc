@@ -1,7 +1,6 @@
 class CriticsController < ApplicationController
 
   before_filter :admin_required
-  before_filter :get_site, :only => [:create]
   before_filter :get_book
   before_filter :get_critic, :only => [:edit, :update, :destroy, :show]
   after_filter :add_visit, :only => [:show]

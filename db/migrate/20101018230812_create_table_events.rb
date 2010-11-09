@@ -12,8 +12,6 @@ class CreateTableEvents < ActiveRecord::Migration
       t.column :finish_date, :datetime
       t.column :cached_slug, :string
       t.column :num_visits, :integer, :default => 0
-      t.column :site_id, :integer
-      t.column :lang, :string, :size => 3
       t.timestamps
     end
   end

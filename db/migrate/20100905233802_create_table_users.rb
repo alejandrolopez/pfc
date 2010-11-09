@@ -12,13 +12,12 @@ class CreateTableUsers < ActiveRecord::Migration
       t.datetime :remember_token_expires_at
       t.string :activation_code, :limit => 40
       t.datetime :activated_at
-      t.integer :site_id
       t.string :cached_slug
       t.boolean :system, :default => 0
       t.timestamps
     end
 
-    m = User.new :login => "admin", :password => "admin", :name => "Admin", :surname1 => "Admin", :surname2 => "Admin", :email => "alelop3z@gmail.com", :site_id => Site.first.id, :system => true
+    m = User.new :login => "admin", :password => "admin", :name => "Admin", :surname1 => "Admin", :surname2 => "Admin", :email => "alelop3z@gmail.com", :system => true
     m.activate
 
     # Creamos los grupos
@@ -26,12 +25,11 @@ class CreateTableUsers < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.string :cached_slug
-      t.integer :site_id
       t.boolean :system, :default => 0
       t.timestamps
     end
 
-    g = Group.new :name => "Administradores", :description => "Grupo de los administradores", :site_id => Site.first.id, :system => true
+    g = Group.new :name => "Administradores", :description => "Grupo de los administradores", :system => true
     g.save(false)
 
     # Creamos la tabla asociada

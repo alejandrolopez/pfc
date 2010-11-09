@@ -4,15 +4,14 @@ class UsersController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_filter :admin_required, :except => [:new, :create]
   before_filter :get_user, :only => [:show, :edit, :update, :destroy, :activate]
-  before_filter :get_site, :only => [:create, :remember_password, :save_new_password]
 
   def index
-    @users = User.where(["site_id = ?", session[:site_id]]).order(sort_column + " " + sort_direction)
+    @users = User.order(sort_column + " " + sort_direction)
     @users = @users.paginate(:per_page => APP_CONFIG["default_pagination"], :page => params[:page])
   end
   
   def order
-    @users = User.where(["site_id = ?", session[:site_id]]).order(sort_column + " " + sort_direction)
+    @users = User.order(sort_column + " " + sort_direction)
     @users = @users.paginate :per_page => APP_CONFIG["default_pagination"], :page => params[:page]
     render :action => :index
   end
@@ -26,11 +25,10 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
-    @user.site_id = session[:site_id]
 
     if @user.save
       # Se envia un correo al usuario para activar sus datos
-      UserMailer.registration_confirmation(@user, @site.domain_without_http).deliver
+      UserMailer.registration_confirmation(@user, request.host_with_port).deliver
       redirect_to(users_path(:page => params[:page]), :notice => t("user.created"))
     else
       render :action => :new
@@ -62,7 +60,7 @@ class UsersController < ApplicationController
   end
 
   def activate
-    @user = User.where(["login = ? and activation_code = ? and site_id = ?", params[:id], params[:activation_code], params[:site_id]]).first
+    @user = User.where(["login = ? and activation_code = ?", params[:id], params[:activation_code]]).first
 
     unless @user.blank?
       @user.activate
@@ -73,12 +71,12 @@ class UsersController < ApplicationController
   end
 
   def remember_password
-    @user = User.where(["email = ? and site_id = ?", params[:email], @site.id]).first
+    @user = User.where(["email = ?", params[:email]]).first
 
     unless @user.blank?
       @user.generar_remember_token
       # Se envia un correo al usuario para activar sus datos
-      UserMailer.remember_password(@user, @site.domain_without_http).deliver
+      UserMailer.remember_password(@user, request.host_with_port).deliver
       redirect_to(users_path, :notice => t("user.mail_sent_to_new_password"))
     else
       redirect_to(forget_password_user_path, :error => t("user.dont_exist_mail"))
@@ -86,7 +84,7 @@ class UsersController < ApplicationController
   end
 
   def save_new_password
-    @user = User.where(["login = ? and remember_token = ? and site_id = ?", params[:id], params[:token], @site.id]).first
+    @user = User.where(["login = ? and remember_token = ?", params[:id], params[:token]]).first
 
     if request.post?
       if @user and @user.remember_token_expires_at >= Time.now
@@ -104,11 +102,7 @@ class UsersController < ApplicationController
   private
   
     def get_user
-      @user = User.find(params[:id], :scope => session[:site_id])
-    end
-
-    def get_site
-      @site = Site.find(session[:site_id])
+      @user = User.find(params[:id])
     end
 
     def sort_column

@@ -45,7 +45,7 @@ class ProvincesController < ApplicationController
   private
   
     def get_country
-      @country = Country.find(params[:country_id], :scope => session[:site_id])
+      @country = Country.find(params[:country_id])
     end
 
     def get_province

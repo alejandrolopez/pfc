@@ -1,11 +1,10 @@
 class Group < ActiveRecord::Base
 
-  belongs_to :site
   has_and_belongs_to_many :users, :order => "login ASC"
   
   validates :name, :presence => true, :uniqueness => true
   
-  has_friendly_id :name, :use_slug => true, :approximate_ascii => true, :scope => :site
+  has_friendly_id :name, :use_slug => true, :approximate_ascii => true
 
   # Devuelve cierto si el usuario user pertenece al grupo
   def user_pertenece_al_grupo?(user)

@@ -3,19 +3,16 @@ class EventsController < ApplicationController
   # Helper para controlar las columnas de ordenacion (por defecto name ASC)
   helper_method :sort_column, :sort_direction
   before_filter :admin_required
-  before_filter :get_site, :only => [:create]
   before_filter :get_event, :only => [:edit, :update, :show, :destroy]
   after_filter :add_visit, :only => [:show]
 
   def index
-    @events = Event.where("site_id = #{session[:site_id]}")
-    @events = @events.order(sort_column + " " + sort_direction)
+    @events = Event.order(sort_column + " " + sort_direction)
     @events = @events.paginate :page => params[:page], :per_page => APP_CONFIG["events_pagination"]
   end
 
   def order
-    @events = Noticia.where("site_id = #{session[:site_id]}")
-    @events = @events.order(sort_column + " " + sort_direction)
+    @events = Event.order(sort_column + " " + sort_direction)
     @events = @events.paginate :page => params[:page], :per_page => APP_CONFIG["events_pagination"]
     render :action => :index
   end
@@ -26,8 +23,6 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(params[:event])
-    @event.site_id = @site.id
-    @event.lang = @site.value
 
     if @event.save
       redirect_to(events_path(:page => params[:page]), :notice => t("event.created"))
@@ -60,7 +55,7 @@ class EventsController < ApplicationController
     # Conseguir el evento seleccionado
     def get_event
       begin
-        @noticia = Event.find(params[:id], :scope => session[:site_id])
+        @noticia = Event.find(params[:id])
       rescue ActiveRecord::RecordNotFound
         redirect_to(events_path(:page => params[:page]), :error => t("event.not_exist"))
       end

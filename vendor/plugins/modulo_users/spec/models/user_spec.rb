@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'site'
 require 'group'
 require 'user'
 
@@ -34,7 +33,6 @@ describe "Modelo user", :type => :model do
   end
 
   it "admin deberia pertenecer al grupo administradores" do
-    site = Site.first
     group = Group.where("name = 'administradores'").first
     user = User.where("login = 'admin'").first
     user.pertenece_al_grupo?(group).should be_true

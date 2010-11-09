@@ -10,8 +10,6 @@ class CreateTableNoticias < ActiveRecord::Migration
       t.column :published, :boolean
       t.column :cached_slug, :string
       t.column :num_visits, :integer, :default => 0
-      t.column :site_id, :integer
-      t.column :lang, :string, :size => 3
       t.timestamps
     end
   end

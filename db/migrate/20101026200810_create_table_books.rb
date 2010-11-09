@@ -6,7 +6,6 @@ class CreateTableBooks < ActiveRecord::Migration
       t.column :summary, :text
       t.column :description, :text
       t.column :cached_slug, :string
-      t.column :site_id, :integer, :size => 11
       t.column :num_visits, :integer, :default => 0
       t.timestamps
     end

@@ -9,7 +9,6 @@ class Author < ActiveRecord::Base
   validates :email, :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }, :if => :email_not_blank?
 
   belongs_to :country
-  belongs_to :site
 
   has_and_belongs_to_many :books
 

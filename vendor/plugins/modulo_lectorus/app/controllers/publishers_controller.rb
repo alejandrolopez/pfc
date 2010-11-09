@@ -1,11 +1,11 @@
 class PublishersController < ApplicationController
 
+  helper_method :sort_column, :sort_direction
   before_filter :admin_required
-  before_filter :get_site, :only => [:create]
   before_filter :get_publisher, :only => [:edit, :update, :destroy]
 
   def index
-    @publishers = Publisher.where(:site_id => session[:site_id]).order("name ASC")
+    @publishers = Publisher.order(sort_column + " " + sort_direction)
     @publishers = @publishers.paginate :page => params[:page], :per_page => APP_CONFIG["medium_default_pagination"]
   end
 
@@ -15,9 +15,7 @@ class PublishersController < ApplicationController
 
   def create
     @publisher = Publisher.new(params[:publisher])
-    @publisher.site_id = @site.id
-    @publisher.lang = @site.value
-
+    
     if @publisher.save
       redirect_to(publishers_path(:page => params[:page]), :notice => t("publisher.created"))
     else
@@ -49,5 +47,13 @@ class PublishersController < ApplicationController
       rescue ActiveRecord::RecordNotFound
         redirect_to(publishers_path(:page => params[:page]), :error => t("publisher.not_exist"))
       end
+    end
+
+    def sort_column
+      params[:sort] || "name"
+    end
+
+    def sort_direction
+      params[:direction] || "desc"
     end
 end

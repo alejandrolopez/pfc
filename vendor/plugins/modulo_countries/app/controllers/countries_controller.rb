@@ -1,10 +1,11 @@
 class CountriesController < ApplicationController
 
+  helper_method :sort_column, :sort_direction
   before_filter :admin_required
   before_filter :get_country, :only => [:edit, :update, :destroy]
 
   def index
-    @countries = Country.where(:site_id => session[:site_id]).order("name ASC")
+    @countries = Country.order(sort_column + " " + sort_direction)
     @countries = @countries.paginate :page => params[:page], :per_page => 50
   end
 
@@ -42,6 +43,14 @@ class CountriesController < ApplicationController
   private 
 
     def get_country
-      @country = Country.find(params[:id], :scope => session[:site_id])
+      @country = Country.find(params[:id])
+    end
+
+    def sort_column
+      params[:sort] || "name"
+    end
+
+    def sort_direction
+      params[:direction] || "ASC"
     end
 end

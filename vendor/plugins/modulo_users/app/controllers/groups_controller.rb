@@ -7,13 +7,13 @@ class GroupsController < ApplicationController
 
   # Listado de grupos
   def index
-    @groups = Group.where(["site_id = ?", session[:site_id]]).order(sort_column + " " + sort_direction)
+    @groups = Group.order(sort_column + " " + sort_direction)
     @groups = @groups.paginate :per_page => APP_CONFIG["default_pagination"], :page => params[:page]
   end
 
   # Listado ordenado de grupos
   def order
-    @groups = Group.where(["site_id = ?", session[:site_id]]).order(sort_column + " " + sort_direction)
+    @groups = Group.order(sort_column + " " + sort_direction)
     @groups = @groups.paginate :per_page => APP_CONFIG["default_pagination"], :page => params[:page]
     render :action => :index
   end
@@ -26,7 +26,6 @@ class GroupsController < ApplicationController
   # Accion de crear el grupo
   def create
     @group = Group.new(params[:group])
-    @group.site_id = session[:site_id]
 
     if @group.save
       redirect_to(groups_path(:page => params[:page]), :notice => t("group.created"))
@@ -105,7 +104,7 @@ class GroupsController < ApplicationController
   private 
   
     def get_group
-      @group = Group.find(params[:id], :scope => session[:site_id])
+      @group = Group.find(params[:id])
     end
 
     def sort_column

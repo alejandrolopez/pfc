@@ -5,8 +5,6 @@ class CreateTableBlogs < ActiveRecord::Migration
       t.column :title, :string
       t.column :description, :text
       t.column :cached_slug, :string
-      t.column :site_id, :integer
-      t.column :lang, :string, :size => 3
       t.timestamps
     end
 

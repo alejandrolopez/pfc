@@ -1,20 +1,20 @@
 class BooksController < ApplicationController
 
+  helper_method :sort_column, :sort_direction
   before_filter :admin_required
-  before_filter :get_site, :only => [:create]
   before_filter :get_all_authors, :only => [:new, :create, :edit, :update]
   before_filter :get_all_publishers, :only => [:new, :create, :edit, :update]
   before_filter :get_book, :only => [:edit, :update, :destroy, :show, :comment]
   after_filter :add_visit, :only => [:show]
 
   def index
-    @books = Book.where("site_id = #{session[:site_id]}").order("title ASC")
+    @books = Book.where("site_id = #{session[:site_id]}")
+    @books = @books.order(sort_column + " " + sort_direction)
     @books = @books.paginate :page => params[:page], :per_page => APP_CONFIG["books_pagination"]
   end
 
   def order
-    @books = Book.where("site_id = #{session[:site_id]}")
-    @books = @books.paginate :page => params[:page], :per_page => APP_CONFIG["books_pagination"]
+    @books = Book.paginate :page => params[:page], :per_page => APP_CONFIG["books_pagination"]
     render :action => :index
   end
 
@@ -38,7 +38,6 @@ class BooksController < ApplicationController
   # El guardado de un libro se complementa en application.js con una llamada click al boton .save_book
   def create
     @book = Book.new(params[:book])
-    @book.site_id = @site.id
 
     if @book.save
       redirect_to(books_path(:page => params[:page]), :notice => t("book.created"))
@@ -139,5 +138,13 @@ class BooksController < ApplicationController
     def add_visit
       get_book
       @book.update_attribute(:num_visits, @book.num_visits + 1)
+    end
+
+    def sort_column
+      params[:sort] || "title"
+    end
+
+    def sort_direction
+      params[:direction] || "desc"
     end
 end

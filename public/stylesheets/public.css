@@ -10,3 +10,29 @@
 .autor{
     font-weight:700
     }
+
+#menu{
+    display:block
+    }
+    #menu DIV{
+        display:inline;
+        margin:0 15px 0 0
+        }
+        #menu DIV.right{
+            float:right;
+            margin:0 0 0 15px
+            }
+
+TABLE.listado{
+    float:left;
+    display:block;
+    empty-cells:show;
+    width:100%;
+    }
+    TABLE.listado TH{
+        background:#E0E0E0;
+        padding:2px 6px
+        }
+    TABLE.listado TD{
+        padding:2px 6px
+        }

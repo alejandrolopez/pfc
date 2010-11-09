@@ -2,7 +2,6 @@ class PostsController < ApplicationController
 
   helper_method :sort_column, :sort_direction
   before_filter :admin_required
-  before_filter :get_site, :only => [:create]
   before_filter :get_blog, :only => [:index, :new, :create, :edit, :update, :show, :destroy, :comment]
   before_filter :get_post, :only => [:edit, :update, :show, :destroy, :comment]
 
@@ -73,7 +72,7 @@ class PostsController < ApplicationController
     # Conseguir la noticia seleccionada
     def get_blog
       begin
-        @blog = Blog.find(params[:blog_id], :scope => session[:site_id])
+        @blog = Blog.find(params[:blog_id])
       rescue ActiveRecord::RecordNotFound
         redirect_to(blogs_path(:page => params[:page]), :error => t("post.not_exist"))
       end

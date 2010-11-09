@@ -2,7 +2,6 @@ class Book < ActiveRecord::Base
 
   acts_as_commentable
 
-  belongs_to :site
   has_many :critics, :order => "created_at DESC"
   has_and_belongs_to_many :authors, :order => "name ASC, surname1 ASC, surname2 ASC"
   has_and_belongs_to_many :publishers, :order => "name ASC"

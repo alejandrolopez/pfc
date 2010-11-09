@@ -4,10 +4,9 @@ class Event < ActiveRecord::Base
   validates :summary, :presence => true
   validates :description, :presence => true
 
-  belongs_to :site
   before_save :published_or_not
 
-  has_friendly_id :title, :use_slug => true, :approximate_ascii => true, :scope => :site
+  has_friendly_id :title, :use_slug => true, :approximate_ascii => true
 
   def validate
     if self.unpublished_at < self.published_at
