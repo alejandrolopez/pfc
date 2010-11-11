@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
   before_filter :get_group, :only => [:show, :edit, :update, :destroy, :add_user, :add_user_to_group, :delete_from_group]
 
   # Listado de grupos
-  def index
+  def list
     @groups = Group.order(sort_column + " " + sort_direction)
     @groups = @groups.paginate :per_page => APP_CONFIG["default_pagination"], :page => params[:page]
   end
@@ -28,7 +28,7 @@ class GroupsController < ApplicationController
     @group = Group.new(params[:group])
 
     if @group.save
-      redirect_to(groups_path(:page => params[:page]), :notice => t("group.created"))
+      redirect_to(list_groups_path(:page => params[:page]), :notice => t("group.created"))
     else
       render :action => :new
     end
@@ -42,7 +42,7 @@ class GroupsController < ApplicationController
   def update
     if @group.update_attributes(params[:group])
       flash[:notice] = t("group.updated")
-      redirect_to groups_path(:page => params[:page])
+      redirect_to list_groups_path(:page => params[:page])
       return
     end
 
@@ -59,12 +59,12 @@ class GroupsController < ApplicationController
     begin
       if Group.size > 1
         @group.destroy
-        redirect_to(groups_path(:page => params[:page]), :notice => t("group.destroyed"))
+        redirect_to(list_groups_path(:page => params[:page]), :notice => t("group.destroyed"))
       else
-        redirect_to(groups_path(:page => params[:page]), :notice => t("group.last_one"))
+        redirect_to(list_groups_path(:page => params[:page]), :notice => t("group.last_one"))
       end
     rescue
-      redirect_to(groups_path(:page => params[:page]), :error => t("group.not_destroyed"))
+      redirect_to(list_groups_path(:page => params[:page]), :error => t("group.not_destroyed"))
     end
   end
 

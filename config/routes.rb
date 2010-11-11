@@ -81,12 +81,16 @@ Cms3::Application.routes.draw do
     end
 
     collection do
+      get :list
       get :forget_password
       post :remember_password
     end
   end
   
   resources :groups do
+    collection do
+      get :list
+    end
     member do
       get :add_user
       post :add_user_to_group
@@ -98,9 +102,15 @@ Cms3::Application.routes.draw do
     resources :provinces
   end
 
-  resources :authors
+  resources :authors do
+    collection do
+      get :list
+    end
+  end
+  
   resources :books do
     collection do
+      get :list
       get :add_author
       post :add_author_to_book
       delete :delete_author_from_book
@@ -121,7 +131,11 @@ Cms3::Application.routes.draw do
     end
   end
   
-  resources :publishers
+  resources :publishers do
+    collection do
+      get :list
+    end
+  end
   resources :noticias do
     collection do
       get :list

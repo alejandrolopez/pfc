@@ -7,18 +7,17 @@ class BooksController < ApplicationController
   before_filter :get_book, :only => [:edit, :update, :destroy, :show, :comment]
   after_filter :add_visit, :only => [:show]
 
-  def index
-    @books = Book.where("site_id = #{session[:site_id]}")
-    @books = @books.order(sort_column + " " + sort_direction)
+  def list
+    @books = Book.order(sort_column + " " + sort_direction)
     @books = @books.paginate :page => params[:page], :per_page => APP_CONFIG["books_pagination"]
   end
 
   def order
     @books = Book.paginate :page => params[:page], :per_page => APP_CONFIG["books_pagination"]
-    render :action => :index
+    render :action => :list
   end
 
-  def list
+  def index
     @books = Book.find_published
     @books = @books.paginate :page => params[:page], :per_page => APP_CONFIG["books_pagination"] unless @books.blank?
   end
@@ -40,7 +39,7 @@ class BooksController < ApplicationController
     @book = Book.new(params[:book])
 
     if @book.save
-      redirect_to(books_path(:page => params[:page]), :notice => t("book.created"))
+      redirect_to(list_books_path(:page => params[:page]), :notice => t("book.created"))
     else
       render :action => :new
     end
@@ -56,7 +55,7 @@ class BooksController < ApplicationController
   # El guardado de un libro se complementa en application.js con una llamada click al boton .save_book
   def update    
     if (@book.update_attributes(params[:book]))
-      redirect_to(books_path(:page => params[:page]), :notice => t("book.updated"))
+      redirect_to(list_books_path(:page => params[:page]), :notice => t("book.updated"))
     else
       render :action => :edit
     end
@@ -64,7 +63,7 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy
-    redirect_to(books_path(:page => params[:page]), :notice => t("book.destroyed"))
+    redirect_to(list_books_path(:page => params[:page]), :notice => t("book.destroyed"))
   end
 
   def comment
@@ -117,6 +116,40 @@ class BooksController < ApplicationController
     end
   end
 
+  # Saco un listado deeditoriales sin los que estan almacenados en session (cuando se crea de 0 o se guardó un libro sin editorial)
+  # o saco todas las editoriales ordenadas por nombre
+  def add_publisher
+    @publishers = Publisher.find_all_publishers_except(session[:book_publishers].join(",")) unless session[:book_publishers].blank?
+    @publishers = Publisher.find_all_publishers if @publishers.blank?
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # Añadimos a session la editorial seleccionada
+  def add_publisher_to_book
+    @publisher = Publisher.find(params[:publisher_id])
+
+    if !@publisher.blank? and !session[:book_publishers].blank? and !(session[:book_publishers].include?(@publisher.id))
+      session[:book_publishers] << @publisher.id
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # Eliminamos de la session la editorial seleccionada
+  def delete_publisher_from_book
+    @publisher = Publisher.find(params[:publisher_id])
+    session[:book_publishers].delete @publisher.id unless @publisher.blank?
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
     def get_all_authors
@@ -131,7 +164,7 @@ class BooksController < ApplicationController
       begin
         @book = Book.find(params[:id])
       rescue ActiveRecord::RecordNotFound
-        redirect_to books_path(:page => params[:page], :error => t("book.dont_exist"))
+        redirect_to list_books_path(:page => params[:page], :error => t("book.dont_exist"))
       end
     end
 

@@ -21,8 +21,6 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
     t.string   "email"
     t.string   "web"
     t.string   "cached_slug"
-    t.integer  "site_id"
-    t.string   "lang"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -34,20 +32,10 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
 
   add_index "authors_books", ["author_id", "book_id"], :name => "index_authors_books_on_author_id_and_book_id", :unique => true
 
-  create_table "blocks", :force => true do |t|
-    t.string   "name"
-    t.integer  "layout_id"
-    t.integer  "element_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "blogs", :force => true do |t|
     t.string   "title"
     t.text     "description"
     t.string   "cached_slug"
-    t.integer  "site_id"
-    t.string   "lang"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -57,7 +45,6 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
     t.text     "summary"
     t.text     "description"
     t.string   "cached_slug"
-    t.integer  "site_id"
     t.integer  "num_visits",  :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -73,14 +60,14 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
     t.text     "comment"
+    t.integer  "status",                         :default => 0
+    t.string   "author"
+    t.string   "email"
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status",                         :default => 0
-    t.string   "author"
-    t.string   "email"
   end
 
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
@@ -91,7 +78,6 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
     t.string   "name"
     t.string   "value",       :limit => 3
     t.string   "cached_slug"
-    t.integer  "site_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -101,27 +87,19 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
     t.text     "summary"
     t.text     "description"
     t.string   "author"
-    t.string   "cached_slug"
-    t.integer  "num_visits",   :default => 0
     t.boolean  "published",    :default => false
     t.integer  "book_id"
     t.integer  "user_id"
     t.datetime "published_at"
     t.integer  "status",       :default => 0
+    t.string   "cached_slug"
+    t.integer  "num_visits",   :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "critics", ["book_id"], :name => "index_critics_on_book_id"
   add_index "critics", ["user_id"], :name => "index_critics_on_user_id"
-
-  create_table "elements", :force => true do |t|
-    t.string   "name"
-    t.string   "controller"
-    t.string   "action"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "events", :force => true do |t|
     t.string   "title"
@@ -134,8 +112,6 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
     t.datetime "finish_date"
     t.string   "cached_slug"
     t.integer  "num_visits",     :default => 0
-    t.integer  "site_id"
-    t.string   "lang"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -144,7 +120,6 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
     t.string   "name"
     t.text     "description"
     t.string   "cached_slug"
-    t.integer  "site_id"
     t.boolean  "system",      :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -153,17 +128,6 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
   create_table "groups_users", :id => false, :force => true do |t|
     t.integer "group_id"
     t.integer "user_id"
-  end
-
-  create_table "layouts", :force => true do |t|
-    t.string   "name"
-    t.text     "head"
-    t.text     "body"
-    t.integer  "site_id"
-    t.integer  "visible",    :default => 1
-    t.integer  "base",       :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "noticias", :force => true do |t|
@@ -175,8 +139,6 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
     t.boolean  "published"
     t.string   "cached_slug"
     t.integer  "num_visits",     :default => 0
-    t.integer  "site_id"
-    t.string   "lang"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -210,16 +172,7 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
     t.string   "email"
     t.string   "address"
     t.string   "cached_slug"
-    t.string   "lang"
-    t.integer  "site_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sites", :force => true do |t|
-    t.string   "name"
-    t.string   "domain"
-    t.string   "value"
+    t.integer  "num_visits",  :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -248,7 +201,6 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
     t.datetime "remember_token_expires_at"
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
-    t.integer  "site_id"
     t.string   "cached_slug"
     t.boolean  "system",                                  :default => false
     t.datetime "created_at"

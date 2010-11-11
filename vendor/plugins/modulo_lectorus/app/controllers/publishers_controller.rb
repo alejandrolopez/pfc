@@ -2,9 +2,10 @@ class PublishersController < ApplicationController
 
   helper_method :sort_column, :sort_direction
   before_filter :admin_required
-  before_filter :get_publisher, :only => [:edit, :update, :destroy]
+  before_filter :get_publisher, :only => [:edit, :update, :destroy, :show]
+  after_filter :add_visit, :only => [:show]
 
-  def index
+  def list
     @publishers = Publisher.order(sort_column + " " + sort_direction)
     @publishers = @publishers.paginate :page => params[:page], :per_page => APP_CONFIG["medium_default_pagination"]
   end
@@ -17,7 +18,7 @@ class PublishersController < ApplicationController
     @publisher = Publisher.new(params[:publisher])
     
     if @publisher.save
-      redirect_to(publishers_path(:page => params[:page]), :notice => t("publisher.created"))
+      redirect_to(list_publishers_path(:page => params[:page]), :notice => t("publisher.created"))
     else
       render :action => :new
     end
@@ -28,15 +29,18 @@ class PublishersController < ApplicationController
 
   def update
     if (@publisher.update_attributes(params[:publisher]))
-      redirect_to(authors_path(:page => params[:page]), :notice => t("publisher.updated"))
+      redirect_to(list_publishers_path(:page => params[:page]), :notice => t("publisher.updated"))
     else
       render :action => :edit
     end
   end
 
+  def show
+  end
+
   def destroy
     @publisher.destroy
-    redirect_to(authors_path(:page => params[:page]), :notice => t("publisher.destroyed"))
+    redirect_to(list_publishers_path(:page => params[:page]), :notice => t("publisher.destroyed"))
   end
 
   private
@@ -45,8 +49,13 @@ class PublishersController < ApplicationController
       begin
         @publisher = Publisher.find(params[:id])
       rescue ActiveRecord::RecordNotFound
-        redirect_to(publishers_path(:page => params[:page]), :error => t("publisher.not_exist"))
+        redirect_to(list_publishers_path(:page => params[:page]), :error => t("publisher.not_exist"))
       end
+    end
+
+    def add_visit
+      get_publisher
+      @publisher.add_visit
     end
 
     def sort_column

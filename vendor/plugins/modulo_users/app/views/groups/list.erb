@@ -1,0 +1,28 @@
+<h1><%= t("group.list")%></h1>
+  
+<%= raw format_notice(flash[:notice])%>
+<%= raw format_error(flash[:errors])%>
+
+<table>
+  <tr>
+    <th><%= sortable "name", t("name") %></th>
+    <th><%= t("actions") %></th>
+  </tr>
+
+  <% @groups.each do |group| %>
+    <tr>
+      <td><%= group.name %></td>
+      <td class="acciones">
+        <%= link_to t("show"), group_path(group), :title => t("group.show") %>
+        <%= link_to t("edit"), edit_group_path(group), :title => t("group.edit") %>
+        <%= link_to t("destroy"), group, :confirm => t("group.destroy?"), :method => :delete, :title => t("group.destroy") if group.system == 0 %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @groups %>
+
+<div class="cms">
+  <%= link_to t("group.new"), new_group_path(:page => params[:page]), :title => t("group.new") %>
+</div>

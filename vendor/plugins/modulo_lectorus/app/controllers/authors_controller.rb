@@ -6,7 +6,7 @@ class AuthorsController < ApplicationController
   before_filter :get_countries, :only => [:new, :edit, :create, :update]
   before_filter :get_author, :only => [:show, :edit, :update, :destroy]
 
-  def index
+  def list
     @authors = Author.order(sort_column + " " + sort_direction)
     @authors = @authors.paginate :page => params[:page], :per_page => APP_CONFIG["medium_default_pagination"]
   end
@@ -19,7 +19,7 @@ class AuthorsController < ApplicationController
     @author = Author.new(params[:author])
     
     if @author.save
-      redirect_to(authors_path(:page => params[:page]), :notice => t("author.created"))
+      redirect_to(list_authors_path(:page => params[:page]), :notice => t("author.created"))
     else
       render :action => :new
     end
@@ -30,7 +30,7 @@ class AuthorsController < ApplicationController
 
   def update
     if (@author.update_attributes(params[:author]))
-      redirect_to(authors_path(:page => params[:page]), :notice => t("author.updated"))
+      redirect_to(list_authors_path(:page => params[:page]), :notice => t("author.updated"))
     else
       render :action => :edit
     end
@@ -38,7 +38,7 @@ class AuthorsController < ApplicationController
 
   def destroy
     @author.destroy
-    redirect_to(authors_path(:page => params[:page]), :notice => t("author.destroyed"))
+    redirect_to(list_authors_path(:page => params[:page]), :notice => t("author.destroyed"))
   end
 
   private
@@ -47,7 +47,7 @@ class AuthorsController < ApplicationController
       begin
         @author = Author.find(params[:id])
       rescue ActiveRecord::RecordNotFound
-        redirect_to(authors_path(:page => params[:page]), :error => t("author.not_exist"))
+        redirect_to(list_authors_path(:page => params[:page]), :error => t("author.not_exist"))
       end
     end
 
@@ -60,7 +60,7 @@ class AuthorsController < ApplicationController
     end
 
     def sort_direction
-      params[:direction] || "desc"
+      params[:direction] || "ASC"
     end
 
 end

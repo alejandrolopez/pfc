@@ -8,6 +8,7 @@ class CreateTablePublishers < ActiveRecord::Migration
       t.column :email, :string
       t.column :address, :string
       t.column :cached_slug, :string
+      t.column :num_visits, :integer, :default => 0
       t.timestamps
     end
   end

@@ -1,0 +1,21 @@
+<h1><%= t("publisher.edit") %></h1>
+
+<%= render "commons/error_messages", :target => @publisher %>
+
+<% form_tag(publisher_path(@published), :method => :put) do %>
+  <div class="formulario">
+    <div class="formulario-top">
+      <div class="formulario-bottom">
+        <%= render :partial => "form" %>
+
+        <div class="botones">
+          <div>
+            <%= submit_tag t("update"), :title => t("publisher.update") %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to t("back"), list_publishers_path, :class => "back" %>

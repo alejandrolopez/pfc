@@ -65,7 +65,7 @@ class Book < ActiveRecord::Base
       array_values = value.split(",") if value.is_a?(String)
       array_values.each do |elto|
         begin
-          self.authors << Publisher.find(elto)
+          self.publishers << Publisher.find(elto)
         rescue
           nil
         end

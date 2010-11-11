@@ -1,0 +1,30 @@
+<h1><%= t("publisher.list") %></h1>
+
+<%= raw format_notice(flash[:notice]) %>
+<%= raw format_error(flash[:error]) %>
+
+<table>
+  <tr>
+    <th><%= sortable "name", t("name") %></th>
+    <th><%= sortable "email", t("email") %></th>
+    <th><%= t("actions") %></th>
+  </tr>
+
+  <% @publishers.each do |publisher| %>
+    <tr>
+      <td><%= publisher.name %></td>
+      <td><%= publisher.email %></td>
+      <td class="acciones">
+        <%= link_to t("show"), publisher_path(publisher), :title => t("publisher.show") %>
+        <%= link_to t("edit"), edit_publisher_path(publisher), :title => t("publisher.edit") %>
+        <%= link_to t("destroy"), publisher, :confirm => t("publisher.destroy?"), :method => :delete, :title => t("publisher.destroy") %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= will_paginate(@publishers) %>
+
+<div class="admin-links">
+  <%= link_to t("publisher.new"), new_publisher_path %>
+</div>

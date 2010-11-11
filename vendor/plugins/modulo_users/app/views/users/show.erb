@@ -5,4 +5,4 @@
 <p><strong><%= t("surname") %></strong>: <%= @user.surname %></p>
 <p><strong><%= t("email") %></strong>: <%= @user.email %></p>
 
-<%= link_to t("back"), users_path(:page => params[:page]), :class => "back", :title => t("back") %>
+<%= link_to t("back"), list_users_path(:page => params[:page]), :class => "back", :title => t("back") %>

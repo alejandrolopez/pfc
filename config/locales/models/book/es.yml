@@ -4,10 +4,12 @@
 es:
   book:
     add_author_to_book: "Añadir autor al libro"
+    add_publisher_to_book: "Añadir editorial al libro"
     author: "Autor del libro"
     create: "Crear libro"
     created: "Libro creado con éxito"
     delete_author_from_book: "Eliminar al autor del libro"
+    delete_publisher_from_book: "Eliminar editorial del libro"
     destroy: "Eliminar libro"
     destroy?: "¿Está seguro de eliminar este libro?"
     destroyed: "Libro eliminado con éxito"
