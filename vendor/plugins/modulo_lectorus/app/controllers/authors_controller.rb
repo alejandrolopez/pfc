@@ -5,10 +5,16 @@ class AuthorsController < ApplicationController
   before_filter :admin_required
   before_filter :get_countries, :only => [:new, :edit, :create, :update]
   before_filter :get_author, :only => [:show, :edit, :update, :destroy]
+  after_filter :add_visit, :only => [:show]
 
   def list
     @authors = Author.order(sort_column + " " + sort_direction)
     @authors = @authors.paginate :page => params[:page], :per_page => APP_CONFIG["medium_default_pagination"]
+  end
+
+  def show
+    @author = Author.find(params[:id])
+    @books = @author.books
   end
 
   def new
@@ -42,6 +48,11 @@ class AuthorsController < ApplicationController
   end
 
   private
+
+    def add_visit
+      get_author
+      @author.add_visit
+    end
 
     def get_author
       begin

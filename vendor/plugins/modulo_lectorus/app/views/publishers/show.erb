@@ -1,2 +1,6 @@
 <%= @publisher.name  %>
 <%= @publisher.email %>
+
+<%  @books.each do |book| %>
+  <%= book.title %><br />
+<% end -%>

@@ -107,10 +107,17 @@ Cms3::Application.routes.draw do
       get :list
     end
   end
-  
-  resources :books do
+
+  resources :categories do
     collection do
       get :list
+    end
+
+    resources :books, :only => [:index]
+  end
+
+  resources :books do
+    collection do
       get :add_author
       post :add_author_to_book
       delete :delete_author_from_book
@@ -118,6 +125,7 @@ Cms3::Application.routes.draw do
       post :add_publisher_to_book
       delete :delete_publisher_from_book
     end
+
     member do
       post :comment
       get :edit_comment

@@ -4,17 +4,14 @@ class BooksController < ApplicationController
   before_filter :admin_required
   before_filter :get_all_authors, :only => [:new, :create, :edit, :update]
   before_filter :get_all_publishers, :only => [:new, :create, :edit, :update]
+  before_filter :get_all_categories, :only => [:new, :create, :edit, :update]
+  # before_filter :get_category, :only => [:new, :create, :edit, :update, :destroy, :show, :comment]
   before_filter :get_book, :only => [:edit, :update, :destroy, :show, :comment]
   after_filter :add_visit, :only => [:show]
 
   def list
     @books = Book.order(sort_column + " " + sort_direction)
     @books = @books.paginate :page => params[:page], :per_page => APP_CONFIG["books_pagination"]
-  end
-
-  def order
-    @books = Book.paginate :page => params[:page], :per_page => APP_CONFIG["books_pagination"]
-    render :action => :list
   end
 
   def index
@@ -30,8 +27,8 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
-    session[:book_authors] = nil
-    session[:book_publishers] = nil
+    session[:book_authors] = []
+    session[:book_publishers] = []
   end
 
   # El guardado de un libro se complementa en application.js con una llamada click al boton .save_book
@@ -46,8 +43,8 @@ class BooksController < ApplicationController
   end
 
   def edit
-    session[:book_authors] = nil
-    session[:book_publishers] = nil
+    session[:book_authors] = []
+    session[:book_publishers] = []
     session[:book_authors] = @book.authors.collect(&:id) rescue []
     session[:book_publishers] = @book.publishers.collect(&:id) rescue []
   end
@@ -65,7 +62,7 @@ class BooksController < ApplicationController
     @book.destroy
     redirect_to(list_books_path(:page => params[:page]), :notice => t("book.destroyed"))
   end
-
+  
   def comment
     @comment = Comment.new(params[:comment])
     @comment.user_id = session[:user_id]
@@ -97,7 +94,7 @@ class BooksController < ApplicationController
   def add_author_to_book
     @author = Author.find(params[:author_id])
     
-    if !@author.blank? and !session[:book_authors].blank? and !(session[:book_authors].include?(@author.id))
+    if !@author.blank? and !session[:book_authors].include?(@author.id)
       session[:book_authors] << @author.id
     end
 
@@ -131,7 +128,7 @@ class BooksController < ApplicationController
   def add_publisher_to_book
     @publisher = Publisher.find(params[:publisher_id])
 
-    if !@publisher.blank? and !session[:book_publishers].blank? and !(session[:book_publishers].include?(@publisher.id))
+    if !@publisher.blank? and !session[:book_publishers].include?(@publisher.id)
       session[:book_publishers] << @publisher.id
     end
 
@@ -159,12 +156,24 @@ class BooksController < ApplicationController
     def get_all_publishers
       @publishers = Publisher.find_all_publishers
     end
-  
+
+    def get_all_categories
+      @categories = Category.find_all_categories
+    end
+
     def get_book
       begin
         @book = Book.find(params[:id])
       rescue ActiveRecord::RecordNotFound
         redirect_to list_books_path(:page => params[:page], :error => t("book.dont_exist"))
+      end
+    end
+
+    def get_category
+      begin
+        @category = Category.find(params[:category_id])
+      rescue ActiveRecord::RecordNotFound
+        redirect_to list_categories_path(:page => params[:page], :error => t("category.dont_exist"))
       end
     end
 

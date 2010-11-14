@@ -14,6 +14,21 @@
 </div>
 
 <div>
+  <label for="book_isbn"><%= t("isbn") %>: </label>
+  <%= text_field :book, :isbn %>
+</div>
+
+<div>
+  <label for="book_web"><%= t("web") %>: </label>
+  <%= text_field :book, :web %>
+</div>
+
+<div>
+  <label for="book_published_year"><%= t("published_year") %>: </label>
+  <%= text_field :book, :published_year %>
+</div>
+
+<div>
   <label for="book_author_ids"><%= t("book.author") %>: </label>
   <%= link_to t("author.add_author"), add_author_books_path, :class => "add_author", :remote => true %>
   <div id="book_authors">
@@ -41,4 +56,9 @@
     </ul>
   </div>
   <%= hidden_field :book, :publisher_ids %>
+</div>
+
+<div>
+  <label for="book_category_id"><%= t("book.category") %>: </label>
+  <%= select :book, :category_id, @categories.map{|x| [x.name, x.id]} %>
 </div>

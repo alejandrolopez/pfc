@@ -36,6 +36,7 @@ class PublishersController < ApplicationController
   end
 
   def show
+    @books = @publisher.books
   end
 
   def destroy
@@ -63,6 +64,6 @@ class PublishersController < ApplicationController
     end
 
     def sort_direction
-      params[:direction] || "desc"
+      params[:direction] || "asc"
     end
 end

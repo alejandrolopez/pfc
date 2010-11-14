@@ -1,0 +1,21 @@
+<h1><%= t("category.new") %></h1>
+
+<%= render "commons/error_messages", :target => @category %>
+
+<%= form_tag(categories_path, :method => :post) do %>
+  <div class="formulario">
+    <div class="formulario-top">
+      <div class="formulario-bottom">
+        <%= render :partial => "form" %>
+
+        <div class="botones">
+          <div>
+            <%= submit_tag t("create"), :title => t("category.create")  %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to t("back"), list_categories_path, :class => "back" %>

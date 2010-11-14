@@ -1,0 +1,19 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  category:
+    create: "Crear categoría"
+    created: "Categoría creada con éxito"
+    destroy: "Eliminar categoría"
+    destroy?: "¿Está seguro de eliminar esta categoría?"
+    destroyed: "Categoría eliminada con éxito"
+    edit: "Edicion de categoría"
+    list: "Listado de categorías"
+    new: "Nueva categoría"
+    not_destroyed: "Hubo un problema a la hora de eliminar la categoría seleccionada"
+    save: "Guardar categoría"
+    show: "Mostrar detalle de la categoría"
+    update: "Actualizar categoría"
+    update_error: "Hubo problemas a la hora de actualizar la categoría seleccionada"
+    updated: "Categoría actualizada con éxito"

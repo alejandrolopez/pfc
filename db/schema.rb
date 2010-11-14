@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101104213821) do
+ActiveRecord::Schema.define(:version => 20101114181232) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -44,11 +44,17 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
     t.string   "title"
     t.text     "summary"
     t.text     "description"
+    t.string   "isbn"
+    t.string   "web"
+    t.string   "published_year"
     t.string   "cached_slug"
-    t.integer  "num_visits",  :default => 0
+    t.integer  "num_visits",     :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "category_id"
   end
+
+  add_index "books", ["category_id"], :name => "index_books_on_category_id"
 
   create_table "books_publishers", :id => false, :force => true do |t|
     t.integer "book_id"
@@ -56,6 +62,13 @@ ActiveRecord::Schema.define(:version => 20101104213821) do
   end
 
   add_index "books_publishers", ["book_id", "publisher_id"], :name => "index_books_publishers_on_book_id_and_publisher_id", :unique => true
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.string   "cached_slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""

@@ -3,6 +3,7 @@ class Book < ActiveRecord::Base
   acts_as_commentable
 
   has_many :critics, :order => "created_at DESC"
+  belongs_to :category
   has_and_belongs_to_many :authors, :order => "name ASC, surname1 ASC, surname2 ASC"
   has_and_belongs_to_many :publishers, :order => "name ASC"
 
@@ -10,6 +11,22 @@ class Book < ActiveRecord::Base
 
   validates :title, :presence => true
   validates :description, :presence => true
+  validates :published_year, :numericality => true, :unless => :published_year_is_blank?
+
+  before_validation :validates_published_year
+
+  # Devuelve true si el campo published_year es blanco (lo uso para las validaciones)
+  def published_year_is_blank?
+    return self.published_year.blank?
+  end
+
+  # Valido si el campo introducido es un año o no
+  # Si no es vacio compruebo que es un numero de 4 cifras (si es numero se comprueba en la validación superior)
+  def validates_published_year
+    unless self.published_year.blank?
+      errors.add(I18n.t("published_year"), I18n.t("not_year")) if self.published_year.size != 4
+    end
+  end
 
   # Funcion que obtiene los comentarios válidos
   # Si no llega usuario sacamos los que son validos

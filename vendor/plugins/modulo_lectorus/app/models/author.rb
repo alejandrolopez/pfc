@@ -10,7 +10,7 @@ class Author < ActiveRecord::Base
 
   belongs_to :country
 
-  has_and_belongs_to_many :books
+  has_and_belongs_to_many :books, :order => "title ASC"
 
   before_save :clean_http_web
 
@@ -28,6 +28,10 @@ class Author < ActiveRecord::Base
   def self.find_all_authors_except(ids)
     @authors = Author.where("id not in (#{ids})").select("id, name, surname1, surname2").order("name ASC, surname1 ASC, surname2 ASC")
     @authors
+  end
+
+  def add_visit
+    self.update_attribute(:num_visits, self.num_visits + 1)
   end
 
   private

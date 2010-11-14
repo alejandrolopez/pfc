@@ -5,6 +5,9 @@ class CreateTableBooks < ActiveRecord::Migration
       t.column :title, :string
       t.column :summary, :text
       t.column :description, :text
+      t.column :isbn, :string
+      t.column :web, :string
+      t.column :published_year, :string, :size => 4
       t.column :cached_slug, :string
       t.column :num_visits, :integer, :default => 0
       t.timestamps
