@@ -5,7 +5,6 @@ class BooksController < ApplicationController
   before_filter :get_all_authors, :only => [:new, :create, :edit, :update]
   before_filter :get_all_publishers, :only => [:new, :create, :edit, :update]
   before_filter :get_all_categories, :only => [:new, :create, :edit, :update]
-  # before_filter :get_category, :only => [:new, :create, :edit, :update, :destroy, :show, :comment]
   before_filter :get_book, :only => [:edit, :update, :destroy, :show, :comment]
   after_filter :add_visit, :only => [:show]
 
@@ -27,6 +26,7 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+    @book_categories = @book.categories
     session[:book_authors] = []
     session[:book_publishers] = []
   end
@@ -38,6 +38,7 @@ class BooksController < ApplicationController
     if @book.save
       redirect_to(list_books_path(:page => params[:page]), :notice => t("book.created"))
     else
+      @book_categories = @book.categories
       render :action => :new
     end
   end
@@ -47,13 +48,17 @@ class BooksController < ApplicationController
     session[:book_publishers] = []
     session[:book_authors] = @book.authors.collect(&:id) rescue []
     session[:book_publishers] = @book.publishers.collect(&:id) rescue []
+    @book_categories = @book.categories
   end
 
   # El guardado de un libro se complementa en application.js con una llamada click al boton .save_book
-  def update    
+  def update
+    params[:book][:category_ids] ||= []
+    
     if (@book.update_attributes(params[:book]))
       redirect_to(list_books_path(:page => params[:page]), :notice => t("book.updated"))
     else
+      @book_categories = @book.categories
       render :action => :edit
     end
   end
@@ -158,7 +163,7 @@ class BooksController < ApplicationController
     end
 
     def get_all_categories
-      @categories = Category.find_all_categories
+      @categories = Category.find_all_parent_categories
     end
 
     def get_book

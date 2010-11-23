@@ -59,6 +59,17 @@
 </div>
 
 <div>
-  <label for="book_category_id"><%= t("book.category") %>: </label>
-  <%= select :book, :category_id, @categories.map{|x| [x.name, x.id]} %>
+  <span><%= t("category.list") %></span>
+  <ul>
+    <% @categories.each do |category| %>
+      <li><%= category.name %></li>
+      <% if category.children.size > 0 %>
+        <ul>
+          <% category.children.each do |c| %>
+            <li><%= check_box_tag "book[category_ids][]", c.id, @book_categories.include?(c), :id => "category_#{c.name}" %><label for="category_<%= c.name %>"><%= c.name %></label></li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end -%>
+  </ul>
 </div>

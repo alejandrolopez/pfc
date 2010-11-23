@@ -13,11 +13,16 @@
     <tr>
       <td><%= category.name %></td>
       <td class="acciones">
+        <%= link_to t("category.new_child"), new_category_path(:parent_id => category), :title => t("category.new_child") %>
         <%= link_to t("show"), category_path(category), :title => t("category.show") %>
         <%= link_to t("edit"), edit_category_path(category), :title => t("category.edit") %>
         <%= link_to t("destroy"), category, :confirm => t("category.destroy?"), :method => :delete, :title => t("category.destroy") %>
       </td>
     </tr>
+
+    <% category.children.each do |c| %>
+      <%= render :partial => "child", :locals => {:category => c} %>
+    <% end -%>
   <% end %>
 </table>
 

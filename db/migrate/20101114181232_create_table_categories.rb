@@ -3,18 +3,25 @@ class CreateTableCategories < ActiveRecord::Migration
   def self.up
     create_table :categories do |t|
       t.column :name, :string
+      t.column :parent_id, :integer, :size => 11, :default => 0
       t.column :cached_slug, :string
       t.timestamps
     end
+    
+    add_index :categories, :cached_slug
 
-    add_column :books, :category_id, :integer, :size => 11
-    add_index :books, :category_id
+    create_table :books_categories, :id => false do |t|
+      t.column :book_id, :integer, :size => 11
+      t.column :category_id, :integer, :size => 11
+    end
+
+    add_index :books_categories, [:book_id, :category_id]
+    add_index :books_categories, :category_id
   end
 
   def self.down
-    remove_index :books, :category_id
-    remove_column :books, :category_id
     drop_table :categories
+    drop_table :books_categories
   end
 
 end

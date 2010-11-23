@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101114181232) do
+ActiveRecord::Schema.define(:version => 20101122205020) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -51,10 +51,15 @@ ActiveRecord::Schema.define(:version => 20101114181232) do
     t.integer  "num_visits",     :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "category_id"
   end
 
-  add_index "books", ["category_id"], :name => "index_books_on_category_id"
+  create_table "books_categories", :id => false, :force => true do |t|
+    t.integer "book_id"
+    t.integer "category_id"
+  end
+
+  add_index "books_categories", ["book_id", "category_id"], :name => "index_books_categories_on_book_id_and_category_id"
+  add_index "books_categories", ["category_id"], :name => "index_books_categories_on_category_id"
 
   create_table "books_publishers", :id => false, :force => true do |t|
     t.integer "book_id"
@@ -65,10 +70,13 @@ ActiveRecord::Schema.define(:version => 20101114181232) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
+    t.integer  "parent_id",   :default => 0
     t.string   "cached_slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "categories", ["cached_slug"], :name => "index_categories_on_cached_slug"
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
@@ -113,6 +121,17 @@ ActiveRecord::Schema.define(:version => 20101114181232) do
 
   add_index "critics", ["book_id"], :name => "index_critics_on_book_id"
   add_index "critics", ["user_id"], :name => "index_critics_on_user_id"
+
+  create_table "entries", :force => true do |t|
+    t.text     "message"
+    t.integer  "wall_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "entries", ["wall_id", "user_id"], :name => "index_entries_on_wall_id_and_user_id"
+  add_index "entries", ["wall_id"], :name => "index_entries_on_wall_id"
 
   create_table "events", :force => true do |t|
     t.string   "title"
@@ -219,5 +238,13 @@ ActiveRecord::Schema.define(:version => 20101114181232) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "walls", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "walls", ["user_id"], :name => "index_walls_on_user_id"
 
 end

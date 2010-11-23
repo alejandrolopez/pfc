@@ -5,17 +5,13 @@ class CategoriesController < ApplicationController
   before_filter :get_category, :only => [:edit, :update, :destroy, :show]
   
   def list
-    @categories = Category.order(sort_column + " " + sort_direction)
-    @categories = @categories.paginate :page => params[:page], :per_page => APP_CONFIG["medium_default_pagination"]
-  end
-
-  def index
-    @categories = Category.order(sort_column + " " + sort_direction)
+    @categories = Category.where("parent_id = 0").order(sort_column + " " + sort_direction)
     @categories = @categories.paginate :page => params[:page], :per_page => APP_CONFIG["medium_default_pagination"]
   end
 
   def new
-    @category = Category.new
+    @parent = Category.find(params[:parent_id]).id rescue 0
+    @category = Category.new(:parent_id => @parent)
   end
 
   def create

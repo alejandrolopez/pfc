@@ -3,6 +3,7 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
 
   has_many :comments
+  has_one :wall
   
   has_friendly_id :login, :use_slug => true, :approximate_ascii => true
   acts_as_commentable
@@ -19,7 +20,8 @@ class User < ActiveRecord::Base
   validates :password, :presence => true, :confirmation => true, :length => {:minimum => 5}, :if => (:password_required? and lambda{|x| !x.password.blank?})
 
   before_save :encrypt_password
-  before_create :make_activation_code 
+  before_create :make_activation_code
+  after_create :create_wall_asociated
 
   # Devuelve los apellidos
   def surname
@@ -34,6 +36,11 @@ class User < ActiveRecord::Base
   # Saber si un usuario pertenece a un grupo en particular
   def pertenece_al_grupo?(group)
     return self.groups.include?(group)
+  end
+
+  # Creamos el muro asociado al usuario
+  def create_wall_asociated
+    self.wall = Wall.create
   end
   
   # Activación del usuario en la base de datos

@@ -11,6 +11,7 @@ es:
     edit: "Edicion de categoría"
     list: "Listado de categorías"
     new: "Nueva categoría"
+    new_child: "Nueva categoría hija"
     not_destroyed: "Hubo un problema a la hora de eliminar la categoría seleccionada"
     save: "Guardar categoría"
     show: "Mostrar detalle de la categoría"

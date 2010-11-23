@@ -85,6 +85,8 @@ Cms3::Application.routes.draw do
       get :forget_password
       post :remember_password
     end
+
+    resources :walls
   end
   
   resources :groups do
@@ -118,6 +120,7 @@ Cms3::Application.routes.draw do
 
   resources :books do
     collection do
+      get :list
       get :add_author
       post :add_author_to_book
       delete :delete_author_from_book
