@@ -12,6 +12,9 @@ class CreateTableAuthors < ActiveRecord::Migration
       t.column :cached_slug, :string
       t.timestamps
     end
+
+    add_index :authors, :cached_slug
+    add_index :authors, [:name, :surname1, :surname2]
   end
 
   def self.down

@@ -13,6 +13,9 @@ class CreateTableBooks < ActiveRecord::Migration
       t.timestamps
     end
 
+    add_index :books, :cached_slug
+    add_index :books, :title
+
     create_table :authors_books, :id => false do |t|
       t.column :author_id, :integer, :size => 11
       t.column :book_id, :integer, :size => 11

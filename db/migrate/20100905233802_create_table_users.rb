@@ -1,5 +1,22 @@
 class CreateTableUsers < ActiveRecord::Migration
   def self.up
+    create_table :walls do |t|
+      t.column :user_id, :integer, :size => 11
+      t.timestamps
+    end
+
+    add_index :walls, :user_id
+
+    create_table :entries do |t|
+      t.column :message, :text
+      t.column :wall_id, :integer, :size => 11
+      t.column :user_id, :integer, :size => 11
+      t.timestamps
+    end
+
+    add_index :entries, :wall_id
+    add_index :entries, [:wall_id, :user_id]
+    
     create_table :users do |t|
       t.string :login
       t.string :name
@@ -48,5 +65,7 @@ class CreateTableUsers < ActiveRecord::Migration
     drop_table :groups_users
     drop_table :groups
     drop_table :users
+    drop_table :entries
+    drop_table :walls
   end
 end

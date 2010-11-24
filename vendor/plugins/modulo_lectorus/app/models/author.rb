@@ -10,7 +10,7 @@ class Author < ActiveRecord::Base
 
   belongs_to :country
 
-  has_and_belongs_to_many :books, :order => "title ASC"
+  has_and_belongs_to_many :books, :order => "title ASC", :uniq => true
 
   before_save :clean_http_web
 

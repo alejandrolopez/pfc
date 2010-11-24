@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101122205020) do
+ActiveRecord::Schema.define(:version => 20101114181232) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(:version => 20101122205020) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "authors", ["cached_slug"], :name => "index_authors_on_cached_slug"
+  add_index "authors", ["name", "surname1", "surname2"], :name => "index_authors_on_name_and_surname1_and_surname2"
 
   create_table "authors_books", :id => false, :force => true do |t|
     t.integer "author_id"
@@ -53,6 +56,9 @@ ActiveRecord::Schema.define(:version => 20101122205020) do
     t.datetime "updated_at"
   end
 
+  add_index "books", ["cached_slug"], :name => "index_books_on_cached_slug"
+  add_index "books", ["title"], :name => "index_books_on_title"
+
   create_table "books_categories", :id => false, :force => true do |t|
     t.integer "book_id"
     t.integer "category_id"
@@ -77,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20101122205020) do
   end
 
   add_index "categories", ["cached_slug"], :name => "index_categories_on_cached_slug"
+  add_index "categories", ["name"], :name => "index_categories_on_name"
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
@@ -208,6 +215,9 @@ ActiveRecord::Schema.define(:version => 20101122205020) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "publishers", ["cached_slug"], :name => "index_publishers_on_cached_slug"
+  add_index "publishers", ["name"], :name => "index_publishers_on_name"
 
   create_table "slugs", :force => true do |t|
     t.string   "name"

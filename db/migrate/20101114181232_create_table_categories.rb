@@ -9,6 +9,7 @@ class CreateTableCategories < ActiveRecord::Migration
     end
     
     add_index :categories, :cached_slug
+    add_index :categories, :name
 
     create_table :books_categories, :id => false do |t|
       t.column :book_id, :integer, :size => 11

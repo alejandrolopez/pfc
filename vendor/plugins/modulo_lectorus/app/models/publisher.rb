@@ -1,6 +1,6 @@
 class Publisher < ActiveRecord::Base
 
-  has_and_belongs_to_many :books, :order => "title ASC"
+  has_and_belongs_to_many :books, :order => "title ASC", :uniq => true
   has_friendly_id :name, :use_slug => true, :approximate_ascii => true
 
   validates :name, :presence => true

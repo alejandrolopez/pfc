@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
 
   has_friendly_id :name, :use_slug => true, :approximate_ascii => true
-  has_and_belongs_to_many :books, :order => "title ASC"
+  has_and_belongs_to_many :books, :order => "title ASC", :uniq => true
   acts_as_tree :order => "name ASC"
   
   validates :name, :presence => true

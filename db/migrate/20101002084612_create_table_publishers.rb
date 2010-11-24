@@ -11,6 +11,9 @@ class CreateTablePublishers < ActiveRecord::Migration
       t.column :num_visits, :integer, :default => 0
       t.timestamps
     end
+
+    add_index :publishers, :cached_slug
+    add_index :publishers, :name
   end
 
   def self.down

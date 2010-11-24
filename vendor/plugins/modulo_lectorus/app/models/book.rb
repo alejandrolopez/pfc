@@ -3,9 +3,9 @@ class Book < ActiveRecord::Base
   acts_as_commentable
 
   has_many :critics, :order => "created_at DESC"
-  has_and_belongs_to_many :authors, :order => "name ASC, surname1 ASC, surname2 ASC"
-  has_and_belongs_to_many :publishers, :order => "name ASC"
-  has_and_belongs_to_many :categories, :order => "name ASC"
+  has_and_belongs_to_many :authors, :order => "name ASC, surname1 ASC, surname2 ASC", :uniq => true
+  has_and_belongs_to_many :publishers, :order => "name ASC", :uniq => true
+  has_and_belongs_to_many :categories, :order => "name ASC", :uniq => true
 
   has_friendly_id :title, :use_slug => true, :approximate_ascii => true
 
