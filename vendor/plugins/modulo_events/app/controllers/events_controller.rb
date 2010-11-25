@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+
+
   # Helper para controlar las columnas de ordenacion (por defecto name ASC)
   helper_method :sort_column, :sort_direction
   before_filter :admin_required
